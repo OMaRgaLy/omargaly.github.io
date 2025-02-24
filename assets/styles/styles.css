@@ -74,7 +74,6 @@ a:hover {
     text-decoration: underline;
 }
 
-@media (prefers-color-scheme: dark) {
     body {
         background-color: black;
         color: #c8cbcd;
@@ -83,12 +82,6 @@ a:hover {
     a {
         color: dodgerblue;
     }
-
-    .content__social-item img,
-    .footer__social-item img{
-        filter: invert(1);
-    }
-}
 
 .main {
     margin: auto;
