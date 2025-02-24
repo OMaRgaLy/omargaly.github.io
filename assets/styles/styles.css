@@ -86,7 +86,7 @@ a:hover {
 
     .content__social-item img,
     .footer__social-item img{
-        filter: invert(1);
+        filter: invert(0);
     }
 }
 
@@ -198,12 +198,12 @@ a:hover {
 }
 
 .project .main-item__description {
-    font-weight: 100;
+    font-weight: 400;
     margin-top: 1rem;
 }
 
 .project .main-item__subdescription {
-    font-weight: 200;
+    font-weight: 400;
     margin-top: 1rem;
 }
 .project .main-item__subdescription span {
