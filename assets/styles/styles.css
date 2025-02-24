@@ -86,7 +86,7 @@ a:hover {
 
     .content__social-item img,
     .footer__social-item img{
-        filter: invert(0);
+        filter: invert(1);
     }
 }
 
