@@ -1,0 +1,63 @@
+<div class="tabs" role="tablist" aria-label="Crypto kit">
+  <button class="tab" type="button" role="tab" data-tab="chain">Chain</button>
+  <button class="tab" type="button" role="tab" data-tab="ciphers">Ciphers</button>
+  <button class="tab" type="button" role="tab" data-tab="hashes">Hashes</button>
+  <button class="tab" type="button" role="tab" data-tab="detect">Detect</button>
+</div>
+
+<section class="panel" role="tabpanel" data-panel="chain">
+  <label class="field"><span>Input</span><textarea class="code" id="chain-in" spellcheck="false" rows="5"></textarea></label>
+  <div class="steps" id="chain-steps"></div>
+  <div class="btn-row">
+    <select id="chain-add-op" aria-label="Operation to add"></select>
+    <button class="btn btn--sm" type="button" id="chain-add">Add step</button>
+    <button class="btn btn--sm" type="button" id="chain-clear">Clear steps</button>
+    <button class="btn btn--sm" type="button" id="chain-copy">Copy output</button>
+  </div>
+  <p class="err" id="chain-err" hidden></p>
+  <pre class="out" id="chain-out"></pre>
+  <p class="muted" id="chain-note"></p>
+</section>
+
+<section class="panel" role="tabpanel" data-panel="ciphers" hidden>
+  <label class="field"><span>Cipher</span>
+    <select id="cipher">
+      <option value="caesar">Caesar</option>
+      <option value="vigenere">Vigenère</option>
+      <option value="atbash">Atbash</option>
+      <option value="rot13">ROT13</option>
+      <option value="morse">Morse</option>
+    </select>
+  </label>
+  <label class="field" id="cipher-key-wrap"><span id="cipher-key-label">Shift</span><input type="text" id="cipher-key" value="3" spellcheck="false"></label>
+  <label class="field"><span>Text</span><textarea class="code" id="cipher-in" spellcheck="false" rows="5"></textarea></label>
+  <div class="btn-row">
+    <button class="btn btn--sm" type="button" id="cipher-enc">Encrypt / encode</button>
+    <button class="btn btn--sm" type="button" id="cipher-dec">Decrypt / decode</button>
+    <button class="btn btn--sm btn--primary" type="button" id="cipher-crack">Crack</button>
+    <button class="btn btn--sm" type="button" id="cipher-copy">Copy output</button>
+  </div>
+  <p class="err" id="cipher-err" hidden></p>
+  <pre class="out" id="cipher-out"></pre>
+  <table class="table" id="cipher-table" hidden>
+    <thead><tr><th>Shift</th><th>Plaintext</th></tr></thead>
+    <tbody></tbody>
+  </table>
+</section>
+
+<section class="panel" role="tabpanel" data-panel="hashes" hidden>
+  <label class="field"><span>Text</span><textarea class="code" id="hash-in" spellcheck="false" rows="4"></textarea></label>
+  <label class="field"><span>HMAC key (optional; leave empty for a plain hash)</span><input type="text" id="hash-key" spellcheck="false"></label>
+  <div class="btn-row"><button class="btn btn--sm btn--primary" type="button" id="hash-run">Compute</button></div>
+  <p class="err" id="hash-err" hidden></p>
+  <table class="table" id="hash-table" hidden>
+    <thead><tr><th>Algorithm</th><th>Digest (hex)</th></tr></thead>
+    <tbody></tbody>
+  </table>
+</section>
+
+<section class="panel" role="tabpanel" data-panel="detect" hidden>
+  <label class="field"><span>Mystery string</span><textarea class="code" id="detect-in" spellcheck="false" rows="4"></textarea></label>
+  <ul class="repo-list" id="detect-out"></ul>
+  <p class="muted" id="detect-empty"></p>
+</section>

@@ -19,7 +19,7 @@
       "title": "Crypto & CTF kit",
       "description": "Operation chains, classical ciphers with crackers, hashes and HMAC, encoding detector.",
       "tags": ["ctf", "ciphers", "hashes"],
-      "status": "soon"
+      "status": "live"
     },
     {
       "id": "pulse",

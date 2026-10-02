@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Crypto &amp; CTF kit — Lab</title>
+<meta name="description" content="Operation chains, classical ciphers with crackers, hashes and HMAC, encoding detector.">
+<meta name="theme-color" content="#0a0c10">
+<link rel="canonical" href="https://omargaly.github.io/lab/crypto/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Crypto &amp; CTF kit — Lab">
+<meta property="og:description" content="Operation chains, classical ciphers with crackers, hashes and HMAC, encoding detector.">
+<meta property="og:url" content="https://omargaly.github.io/lab/crypto/">
+<meta property="og:image" content="https://omargaly.github.io/assets/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<script>
+(function(){var d=document.documentElement;d.classList.add('js');try{var t=localStorage.getItem('theme');if(t!=='light'&&t!=='dark'){t=matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'}d.dataset.theme=t;var l=localStorage.getItem('lang');if((l==='ru'||l==='kz')&&location.pathname==='/'){location.replace('/'+l+'/')}}catch(e){}})();
+</script>
+<link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/base.css">
+<link rel="stylesheet" href="/assets/css/components.css">
+<link rel="stylesheet" href="/assets/css/lab.css">
+<script type="module" src="/assets/js/lab/crypto.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="logo" href="/" aria-label="Home">o<span>b</span>_</a>
+    <nav class="lab-nav" aria-label="Lab"><a href="/lab/">Lab</a></nav>
+    <button class="icon-btn" type="button" data-theme-toggle aria-label="Toggle theme"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.4 5.4 0 0 1-4.4 2.26 5.4 5.4 0 0 1-5.4-5.4c0-1.8.88-3.4 2.24-4.4A9.1 9.1 0 0 0 12 3z"/></svg></button>
+  </div>
+</header>
+
+<main id="main" class="container lab">
+  <p class="lab-back"><a href="/lab/">← Lab</a></p>
+  <h1 class="lab-title">Crypto &amp; CTF kit</h1>
+  <p class="lab-intro">Operation chains, classical ciphers with crackers, hashes and HMAC, encoding detector.</p>
+  <div class="tabs" role="tablist" aria-label="Crypto kit">
+  <button class="tab" type="button" role="tab" data-tab="chain">Chain</button>
+  <button class="tab" type="button" role="tab" data-tab="ciphers">Ciphers</button>
+  <button class="tab" type="button" role="tab" data-tab="hashes">Hashes</button>
+  <button class="tab" type="button" role="tab" data-tab="detect">Detect</button>
+</div>
+
+<section class="panel" role="tabpanel" data-panel="chain">
+  <label class="field"><span>Input</span><textarea class="code" id="chain-in" spellcheck="false" rows="5"></textarea></label>
+  <div class="steps" id="chain-steps"></div>
+  <div class="btn-row">
+    <select id="chain-add-op" aria-label="Operation to add"></select>
+    <button class="btn btn--sm" type="button" id="chain-add">Add step</button>
+    <button class="btn btn--sm" type="button" id="chain-clear">Clear steps</button>
+    <button class="btn btn--sm" type="button" id="chain-copy">Copy output</button>
+  </div>
+  <p class="err" id="chain-err" hidden></p>
+  <pre class="out" id="chain-out"></pre>
+  <p class="muted" id="chain-note"></p>
+</section>
+
+<section class="panel" role="tabpanel" data-panel="ciphers" hidden>
+  <label class="field"><span>Cipher</span>
+    <select id="cipher">
+      <option value="caesar">Caesar</option>
+      <option value="vigenere">Vigenère</option>
+      <option value="atbash">Atbash</option>
+      <option value="rot13">ROT13</option>
+      <option value="morse">Morse</option>
+    </select>
+  </label>
+  <label class="field" id="cipher-key-wrap"><span id="cipher-key-label">Shift</span><input type="text" id="cipher-key" value="3" spellcheck="false"></label>
+  <label class="field"><span>Text</span><textarea class="code" id="cipher-in" spellcheck="false" rows="5"></textarea></label>
+  <div class="btn-row">
+    <button class="btn btn--sm" type="button" id="cipher-enc">Encrypt / encode</button>
+    <button class="btn btn--sm" type="button" id="cipher-dec">Decrypt / decode</button>
+    <button class="btn btn--sm btn--primary" type="button" id="cipher-crack">Crack</button>
+    <button class="btn btn--sm" type="button" id="cipher-copy">Copy output</button>
+  </div>
+  <p class="err" id="cipher-err" hidden></p>
+  <pre class="out" id="cipher-out"></pre>
+  <table class="table" id="cipher-table" hidden>
+    <thead><tr><th>Shift</th><th>Plaintext</th></tr></thead>
+    <tbody></tbody>
+  </table>
+</section>
+
+<section class="panel" role="tabpanel" data-panel="hashes" hidden>
+  <label class="field"><span>Text</span><textarea class="code" id="hash-in" spellcheck="false" rows="4"></textarea></label>
+  <label class="field"><span>HMAC key (optional; leave empty for a plain hash)</span><input type="text" id="hash-key" spellcheck="false"></label>
+  <div class="btn-row"><button class="btn btn--sm btn--primary" type="button" id="hash-run">Compute</button></div>
+  <p class="err" id="hash-err" hidden></p>
+  <table class="table" id="hash-table" hidden>
+    <thead><tr><th>Algorithm</th><th>Digest (hex)</th></tr></thead>
+    <tbody></tbody>
+  </table>
+</section>
+
+<section class="panel" role="tabpanel" data-panel="detect" hidden>
+  <label class="field"><span>Mystery string</span><textarea class="code" id="detect-in" spellcheck="false" rows="4"></textarea></label>
+  <ul class="repo-list" id="detect-out"></ul>
+  <p class="muted" id="detect-empty"></p>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <p class="muted">© 2026 Omargaly Bitebayev · Runs in your browser, nothing you type leaves your device.</p>
+    <a href="/">← Home</a>
+  </div>
+</footer>
+</body>
+</html>
