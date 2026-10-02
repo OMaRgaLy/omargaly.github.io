@@ -7,6 +7,7 @@ const FILES = [
   ['@fontsource-variable/inter', 'inter-cyrillic-ext-wght-normal.woff2'],
   ['@fontsource-variable/jetbrains-mono', 'jetbrains-mono-latin-wght-normal.woff2'],
   ['@fontsource-variable/jetbrains-mono', 'jetbrains-mono-cyrillic-wght-normal.woff2'],
+  ['@fontsource-variable/jetbrains-mono', 'jetbrains-mono-cyrillic-ext-wght-normal.woff2'],
 ];
 
 await mkdir('assets/fonts', { recursive: true });

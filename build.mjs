@@ -3,6 +3,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { render, escapeHtml as e } from './src/lib/template.mjs';
 import { ICONS } from './src/lib/icons.mjs';
+import { assertSameKeys } from './src/lib/i18n-check.mjs';
 import { monthsBetween, formatDuration } from './assets/js/duration.js';
 
 const ROOT = dirname(fileURLToPath(import.meta.url));
@@ -90,9 +91,11 @@ export async function build({ now = new Date() } = {}) {
     read('src/templates/head-script.html'),
   ]);
   const pages = new Map();
+  const reference = await readJson('i18n/en.json');
 
   for (const lang of LANGS) {
     const s = await readJson(`i18n/${lang}.json`);
+    assertSameKeys(reference, s, lang);
     const raw = {
       lang,
       htmlLang: HTML_LANG[lang],
