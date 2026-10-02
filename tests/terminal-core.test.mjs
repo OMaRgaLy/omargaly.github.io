@@ -33,8 +33,7 @@ test('contact prints label and url', () => {
 
 test('unknown command echoes the input as plain text', () => {
   const r = runCommand('<img src=x onerror=alert(1)>', data);
-  assert.equal(r.lines.length, 1);
-  assert.ok(r.lines[0].includes('<img src=x onerror=alert(1)>'));
+  assert.deepEqual(r.lines, ['command not found: <img. Try "help".']);
   assert.equal(r.action, undefined);
 });
 
