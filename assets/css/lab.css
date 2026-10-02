@@ -49,6 +49,8 @@ textarea.code { min-height: 130px; resize: vertical; }
 .hm .h3 { fill: color-mix(in srgb, var(--accent) 80%, var(--surface-2)); }
 .hm .h4 { fill: var(--accent); }
 .chart { width: 100%; height: auto; }
+.chart.hm { max-width: 420px; }
+.chart:not(.hm) { max-width: 520px; }
 .chart text { fill: var(--text); font-family: var(--font-sans); font-size: 12px; }
 .chart .track { fill: var(--surface-2); }
 .chart .fill { fill: var(--accent); }

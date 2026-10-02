@@ -26,7 +26,7 @@
       "title": "GitHub Pulse",
       "description": "Live activity heatmap, languages and top repositories drawn from the public GitHub API.",
       "tags": ["github", "svg"],
-      "status": "soon"
+      "status": "live"
     },
     {
       "id": "ctf",
