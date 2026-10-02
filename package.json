@@ -1,0 +1,17 @@
+{
+  "name": "omargaly.github.io",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "test": "node --test tests/",
+    "serve": "npx --yes http-server . -p 8080 -c-1",
+    "images": "node scripts/optimize-images.mjs",
+    "fonts": "node scripts/copy-fonts.mjs"
+  },
+  "devDependencies": {
+    "@fontsource-variable/inter": "^5.1.0",
+    "@fontsource-variable/jetbrains-mono": "^5.1.0",
+    "sharp": "^0.33.5"
+  }
+}

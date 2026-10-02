@@ -1,0 +1,10 @@
+exclude:
+  - build.mjs
+  - package.json
+  - package-lock.json
+  - node_modules
+  - docs
+  - scripts
+  - src
+  - i18n
+  - tests
