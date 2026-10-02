@@ -1,0 +1,21 @@
+{
+  "origin": "https://omargaly.github.io",
+  "links": [
+    { "id": "github", "label": "GitHub", "href": "https://github.com/OMaRgaLy" },
+    { "id": "linkedin", "label": "LinkedIn", "href": "https://www.linkedin.com/in/bitebayev" },
+    { "id": "telegram", "label": "Telegram", "href": "https://t.me/hackeevo" },
+    { "id": "x", "label": "X", "href": "https://x.com/OMaRgaLy212" }
+  ],
+  "stack": {
+    "main": ["Go", "TypeScript", "React", "Next.js", "Python", "MongoDB", "PostgreSQL", "Docker", "Coolify", "Grafana", "Loki", "Sentry", "Postman"],
+    "hobby": ["PHP", "MySQL", "Elixir", "Redis", "Kafka", "gRPC", "REST"]
+  },
+  "experience": [
+    { "id": "kwaaka", "start": "2025-03-17", "current": true }
+  ],
+  "education": [
+    { "id": "kolesa", "url": "https://upgrade.kolesa.group/" },
+    { "id": "sapsan", "url": "https://www.instagram.com/sapsan_code.kz/" }
+  ],
+  "projects": []
+}

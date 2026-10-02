@@ -1,0 +1,89 @@
+{
+  "meta": {
+    "title": "Omargaly Bitebayev — Software Engineer · Backend & AI",
+    "description": "Personal site of Omargaly Bitebayev: Go backend engineer growing into AI engineering."
+  },
+  "skip": "Skip to content",
+  "nav": { "about": "About", "experience": "Experience", "stack": "Stack", "projects": "Projects", "lab": "Lab" },
+  "theme": { "toggle": "Toggle theme" },
+  "hero": {
+    "hello": "Hi, I'm",
+    "name": "Omargaly Bitebayev",
+    "title": "Software Engineer · Backend & AI",
+    "tagline": "Go backend engineer, growing into AI engineering.",
+    "photo_alt": "Portrait of Omargaly Bitebayev",
+    "cta_contact": "Say hi on Telegram",
+    "cta_github": "GitHub"
+  },
+  "about": {
+    "heading": "About",
+    "p1": "I'm a backend engineer who likes to take a task and see it through to production. My day-to-day is Go, services and data, and I enjoy making complicated systems feel simple.",
+    "p2": "I'm moving towards AI engineering — building agents and automation that do real work — and aiming to grow into a senior engineer along the way. I learn in public, share ideas and love a good code review.",
+    "p3": "Always up for a chat about code, systems and AI."
+  },
+  "experience": {
+    "heading": "Experience",
+    "kwaaka": {
+      "company": "Kwaaka",
+      "role": "Golang Backend Developer",
+      "period": "Mar 2025 — Present",
+      "desc": "Kwaaka automates restaurant operations: it brings orders from many food-delivery platforms into the restaurant's own systems, so teams stop juggling tablets and work in one flow. I build backend services in Go and AI-driven automation for real business workflows."
+    }
+  },
+  "education": {
+    "heading": "Education",
+    "kolesa": {
+      "title": "Kolesa Upgrade",
+      "period": "Sep — Nov 2022",
+      "desc": "Backend development essentials: from PHP 8+ and Go basics to full-fledged web services — Slim, MySQL, Docker, HTTP and API design."
+    },
+    "sapsan": {
+      "title": "Sapsan Code",
+      "period": "Sep 2023 — May 2024",
+      "desc": "Java backend from scratch: Spring Boot, REST APIs, authentication and Docker."
+    }
+  },
+  "stack": { "heading": "Stack", "main": "Daily", "hobby": "Side projects & hobbies" },
+  "projects": {
+    "heading": "Projects",
+    "empty": "Cooking something good. Check back soon.",
+    "github": "Browse GitHub"
+  },
+  "lab": {
+    "heading": "Lab",
+    "text": "A playground of small dev and CTF tools is coming soon.",
+    "badge": "Soon"
+  },
+  "footer": { "built": "Built by hand. No frameworks." },
+  "lang": { "label": "Language", "beta": "beta", "beta_title": "Draft translation, proofreading in progress" },
+  "notfound": { "title": "404 — Page not found", "text": "This page does not exist.", "home": "Back to home" },
+  "terminal": {
+    "label": "Terminal",
+    "open": "Open terminal",
+    "close": "Close",
+    "prompt": "guest@omargaly:~$",
+    "hint": "Type \"help\" to start. Esc to close.",
+    "help": [
+      "Available commands:",
+      "  whoami   who am I",
+      "  stack    what I work with",
+      "  now      what I'm up to",
+      "  contact  where to find me",
+      "  lab      the playground",
+      "  theme    dark | light | toggle",
+      "  lang     en | ru | kz",
+      "  clear    clear the screen",
+      "  exit     close the terminal"
+    ],
+    "whoami": ["Omargaly Bitebayev", "Software Engineer · Backend & AI", "Go backend engineer, growing into AI engineering."],
+    "now": ["Building backend services in Go at Kwaaka.", "Learning to build AI agents that do real work.", "Tinkering with side projects and CTF puzzles."],
+    "lab": ["The lab is coming soon: dev and CTF tools in your browser."],
+    "not_found": "command not found: {cmd}. Try \"help\".",
+    "usage_theme": "usage: theme dark | light | toggle",
+    "usage_lang": "usage: lang en | ru | kz",
+    "theme_set": "theme: {value}",
+    "lang_switching": "switching language: {value}...",
+    "stack_main": "daily",
+    "stack_hobby": "on the side"
+  }
+}

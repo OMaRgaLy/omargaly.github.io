@@ -1,0 +1,89 @@
+{
+  "meta": {
+    "title": "Omargaly Bitebayev — Software Engineer · Backend & AI",
+    "description": "Личный сайт Omargaly Bitebayev: Go backend-инженер, растущий в сторону AI-инженерии."
+  },
+  "skip": "Перейти к содержимому",
+  "nav": { "about": "Обо мне", "experience": "Опыт", "stack": "Стек", "projects": "Проекты", "lab": "Лаб" },
+  "theme": { "toggle": "Сменить тему" },
+  "hero": {
+    "hello": "Привет, я",
+    "name": "Omargaly Bitebayev",
+    "title": "Software Engineer · Backend & AI",
+    "tagline": "Go backend-инженер, расту в сторону AI-инженерии.",
+    "photo_alt": "Портрет Omargaly Bitebayev",
+    "cta_contact": "Написать в Telegram",
+    "cta_github": "GitHub"
+  },
+  "about": {
+    "heading": "Обо мне",
+    "p1": "Я backend-инженер, который любит взять задачу и довести её до продакшена. В работе — Go, сервисы и данные; мне нравится делать сложные системы простыми.",
+    "p2": "Двигаюсь в сторону AI-инженерии: строю агентов и автоматизацию, которые делают реальную работу, и по пути расту до senior-инженера. Учусь открыто, делюсь идеями и люблю хорошее code review.",
+    "p3": "Всегда рад поговорить про код, системы и AI."
+  },
+  "experience": {
+    "heading": "Опыт",
+    "kwaaka": {
+      "company": "Kwaaka",
+      "role": "Golang Backend Developer",
+      "period": "Март 2025 — настоящее время",
+      "desc": "Kwaaka автоматизирует работу ресторанов: собирает заказы из множества платформ доставки в собственные системы ресторана, чтобы команда не жонглировала планшетами, а работала в одном потоке. Я разрабатываю backend-сервисы на Go и AI-автоматизацию для реальных бизнес-процессов."
+    }
+  },
+  "education": {
+    "heading": "Образование",
+    "kolesa": {
+      "title": "Kolesa Upgrade",
+      "period": "Сентябрь — ноябрь 2022",
+      "desc": "Основы backend-разработки: от PHP 8+ и основ Go до полноценных веб-сервисов — Slim, MySQL, Docker, HTTP и проектирование API."
+    },
+    "sapsan": {
+      "title": "Sapsan Code",
+      "period": "Сентябрь 2023 — май 2024",
+      "desc": "Java backend с нуля: Spring Boot, REST API, аутентификация и Docker."
+    }
+  },
+  "stack": { "heading": "Стек", "main": "Каждый день", "hobby": "Пет-проекты и хобби" },
+  "projects": {
+    "heading": "Проекты",
+    "empty": "Готовлю кое-что хорошее. Загляни позже.",
+    "github": "Смотреть GitHub"
+  },
+  "lab": {
+    "heading": "Лаб",
+    "text": "Песочница из небольших dev- и CTF-инструментов скоро откроется.",
+    "badge": "Скоро"
+  },
+  "footer": { "built": "Сделано вручную. Без фреймворков." },
+  "lang": { "label": "Язык", "beta": "beta", "beta_title": "Черновик перевода, идёт вычитка" },
+  "notfound": { "title": "404 — Страница не найдена", "text": "Такой страницы нет.", "home": "На главную" },
+  "terminal": {
+    "label": "Терминал",
+    "open": "Открыть терминал",
+    "close": "Закрыть",
+    "prompt": "guest@omargaly:~$",
+    "hint": "Введи \"help\". Esc — закрыть.",
+    "help": [
+      "Доступные команды:",
+      "  whoami   кто я",
+      "  stack    с чем работаю",
+      "  now      чем занят сейчас",
+      "  contact  где меня найти",
+      "  lab      песочница",
+      "  theme    dark | light | toggle",
+      "  lang     en | ru | kz",
+      "  clear    очистить экран",
+      "  exit     закрыть терминал"
+    ],
+    "whoami": ["Omargaly Bitebayev", "Software Engineer · Backend & AI", "Go backend-инженер, расту в сторону AI-инженерии."],
+    "now": ["Пишу backend-сервисы на Go в Kwaaka.", "Учусь строить AI-агентов, которые делают реальную работу.", "Кручу пет-проекты и CTF-задачки."],
+    "lab": ["Лаб скоро откроется: dev- и CTF-инструменты прямо в браузере."],
+    "not_found": "команда не найдена: {cmd}. Попробуй \"help\".",
+    "usage_theme": "использование: theme dark | light | toggle",
+    "usage_lang": "использование: lang en | ru | kz",
+    "theme_set": "тема: {value}",
+    "lang_switching": "переключаю язык: {value}...",
+    "stack_main": "каждый день",
+    "stack_hobby": "для души"
+  }
+}
