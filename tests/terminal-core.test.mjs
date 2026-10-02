@@ -31,6 +31,12 @@ test('contact prints label and url', () => {
   assert.deepEqual(runCommand('contact', data).lines, ['GitHub    https://github.com/OMaRgaLy']);
 });
 
+test('lab navigates to the lab page', () => {
+  const r = runCommand('lab', data);
+  assert.deepEqual(r.lines, en.terminal.lab);
+  assert.deepEqual(r.action, { type: 'goto', value: '/lab/' });
+});
+
 test('unknown command echoes the input as plain text', () => {
   const r = runCommand('<img src=x onerror=alert(1)>', data);
   assert.deepEqual(r.lines, ['command not found: <img. Try "help".']);

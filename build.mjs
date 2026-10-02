@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { render, escapeHtml as e } from './src/lib/template.mjs';
 import { ICONS } from './src/lib/icons.mjs';
 import { assertSameKeys } from './src/lib/i18n-check.mjs';
+import { buildLab } from './src/lib/lab-build.mjs';
 import { monthsBetween, formatDuration } from './assets/js/duration.js';
 
 const ROOT = dirname(fileURLToPath(import.meta.url));
@@ -78,10 +79,18 @@ const alternates = (site) =>
 
 const jsonForScript = (obj) => JSON.stringify(obj).replace(/</g, '\\u003c');
 
-const sitemap = (site) =>
-  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${LANGS.map(
-    (l) => `  <url><loc>${site.origin}${URL_PATH[l]}</loc></url>`,
-  ).join('\n')}\n</urlset>\n`;
+const sitemap = (site, extraPaths = []) =>
+  `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${[
+    ...LANGS.map((l) => URL_PATH[l]),
+    ...extraPaths,
+  ]
+    .map((p) => `  <url><loc>${site.origin}${p}</loc></url>`)
+    .join('
+')}
+</urlset>
+`;
 
 export async function build({ now = new Date() } = {}) {
   const [site, homeTpl, notFoundTpl, headScript] = await Promise.all([
@@ -124,7 +133,11 @@ export async function build({ now = new Date() } = {}) {
 
   const en = await readJson('i18n/en.json');
   pages.set('404.html', render(notFoundTpl, en, { headScript: headScript.trim() }));
-  pages.set('sitemap.xml', sitemap(site));
+
+  const lab = await buildLab({ site, headScript: headScript.trim(), ctf: { challenges: [] }, now });
+  for (const [path, html] of lab.pages) pages.set(path, html);
+
+  pages.set('sitemap.xml', sitemap(site, lab.urls));
   return pages;
 }
 

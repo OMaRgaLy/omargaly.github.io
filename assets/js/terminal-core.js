@@ -18,7 +18,7 @@ export function runCommand(input, data) {
     case 'now':
       return { lines: [...t.now] };
     case 'lab':
-      return { lines: [...t.lab] };
+      return { lines: [...t.lab], action: { type: 'goto', value: '/lab/' } };
     case 'stack':
       return { lines: [`${t.stack_main}: ${data.stack.main.join(', ')}`, `${t.stack_hobby}: ${data.stack.hobby.join(', ')}`] };
     case 'contact':

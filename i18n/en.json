@@ -51,8 +51,8 @@
   },
   "lab": {
     "heading": "Lab",
-    "text": "A playground of small dev and CTF tools is coming soon.",
-    "badge": "Soon"
+    "text": "Small dev and CTF tools that run entirely in your browser; nothing you type leaves your device.",
+    "cta": "Open the lab"
   },
   "footer": { "built": "Built by hand. No frameworks." },
   "lang": { "label": "Language", "beta": "beta", "beta_title": "Draft translation, proofreading in progress" },
@@ -77,7 +77,7 @@
     ],
     "whoami": ["Omargaly Bitebayev", "Software Engineer · Backend & AI", "Go backend engineer, growing into AI engineering."],
     "now": ["Building backend services in Go at Kwaaka.", "Learning to build AI agents that do real work.", "Tinkering with side projects and CTF puzzles."],
-    "lab": ["The lab is coming soon: dev and CTF tools in your browser."],
+    "lab": ["Opening the lab..."],
     "not_found": "command not found: {cmd}. Try \"help\".",
     "usage_theme": "usage: theme dark | light | toggle",
     "usage_lang": "usage: lang en | ru | kz",

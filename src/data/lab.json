@@ -1,0 +1,39 @@
+{
+  "tools": [
+    {
+      "id": "toolbox",
+      "title": "Dev Toolbox",
+      "description": "JWT decoder, Base64, URL and hex, UUID generator, timestamp converter.",
+      "tags": ["jwt", "base64", "uuid", "time"],
+      "status": "soon"
+    },
+    {
+      "id": "json-to-go",
+      "title": "JSON ⇄ Go",
+      "description": "Turn JSON into Go structs with json tags, or a Go struct back into sample JSON.",
+      "tags": ["go", "json"],
+      "status": "soon"
+    },
+    {
+      "id": "crypto",
+      "title": "Crypto & CTF kit",
+      "description": "Operation chains, classical ciphers with crackers, hashes and HMAC, encoding detector.",
+      "tags": ["ctf", "ciphers", "hashes"],
+      "status": "soon"
+    },
+    {
+      "id": "pulse",
+      "title": "GitHub Pulse",
+      "description": "Live activity heatmap, languages and top repositories drawn from the public GitHub API.",
+      "tags": ["github", "svg"],
+      "status": "soon"
+    },
+    {
+      "id": "ctf",
+      "title": "Mini CTF",
+      "description": "Four flags are hiding on this site. Find them, submit them, climb the scoreboard.",
+      "tags": ["ctf", "game"],
+      "status": "soon"
+    }
+  ]
+}

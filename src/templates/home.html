@@ -34,7 +34,7 @@
       <a href="#experience">{{nav.experience}}</a>
       <a href="#stack">{{nav.stack}}</a>
       <a href="#projects">{{nav.projects}}</a>
-      <a href="#lab">{{nav.lab}}</a>
+      <a href="/lab/">{{nav.lab}}</a>
     </nav>
     <div class="lang" role="group" aria-label="{{lang.label}}">{{{langSwitch}}}</div>
     <button class="icon-btn" type="button" data-theme-toggle aria-label="{{theme.toggle}}"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.4 5.4 0 0 1-4.4 2.26 5.4 5.4 0 0 1-5.4-5.4c0-1.8.88-3.4 2.24-4.4A9.1 9.1 0 0 0 12 3z"/></svg></button>
@@ -98,8 +98,9 @@
     </section>
 
     <section class="card card--lab reveal" id="lab">
-      <h2 class="card__title">{{lab.heading}} <span class="badge">{{lab.badge}}</span></h2>
+      <h2 class="card__title">{{lab.heading}}</h2>
       <p>{{lab.text}}</p>
+      <p><a class="btn btn--primary" href="/lab/">{{lab.cta}}</a></p>
     </section>
   </div>
 </main>

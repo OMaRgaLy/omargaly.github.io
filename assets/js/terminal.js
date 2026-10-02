@@ -62,6 +62,11 @@ export function initTerminal() {
           location.href = langPath(action.value);
         }, 400);
         break;
+      case 'goto':
+        setTimeout(() => {
+          location.href = action.value;
+        }, 300);
+        break;
     }
   };
 
