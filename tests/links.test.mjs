@@ -5,7 +5,11 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
-const PAGES = ['index.html', 'ru/index.html', 'kz/index.html', '404.html'];
+const lab = JSON.parse(readFileSync(join(ROOT, 'src/data/lab.json'), 'utf8'));
+const PAGES = [
+  'index.html', 'ru/index.html', 'kz/index.html', '404.html', 'lab/index.html',
+  ...lab.tools.filter((t) => t.status === 'live').map((t) => `lab/${t.id}/index.html`),
+];
 
 function localRefs(html) {
   const refs = new Set();

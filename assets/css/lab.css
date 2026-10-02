@@ -23,7 +23,7 @@ a.tool-card:hover { transform: translateY(-2px); border-color: var(--accent); te
 .tab[aria-selected="true"] { background: var(--text); color: var(--bg); border-color: transparent; }
 
 .panel { margin-top: 16px; padding: clamp(16px, 3vw, 24px); border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
-.panel h3 { margin-top: 18px; font-size: .95rem; }
+.panel h2 { margin-top: 18px; font-size: .95rem; }
 .field { display: block; margin-top: 14px; }
 .field > span { display: block; margin-bottom: 6px; font-family: var(--font-mono); font-size: .76rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
 .code, .field input, .field select { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface-2); color: var(--text); font-family: var(--font-mono); font-size: .88rem; line-height: 1.5; }
@@ -60,6 +60,8 @@ textarea.code { min-height: 130px; resize: vertical; }
 /* ctf */
 .challenge { padding: 14px 0; border-bottom: 1px solid var(--border); }
 .challenge:last-child { border-bottom: 0; }
-.challenge h3 { margin: 0; }
+.challenge h2 { margin: 0; }
 .challenge .row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
 .challenge input { flex: 1; min-width: 200px; padding: 8px 10px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface-2); color: var(--text); font-family: var(--font-mono); }
+
+.panel p a, .repo-list a, .muted a { text-decoration: underline; text-underline-offset: 3px; }

@@ -19,7 +19,7 @@ function renderList() {
   for (const c of challenges) {
     const box = document.createElement('div');
     box.className = 'challenge';
-    const h = document.createElement('h3');
+    const h = document.createElement('h2');
     h.textContent = `${solved.includes(c.id) ? '✓ ' : ''}${c.title}`;
     const hint = document.createElement('p');
     hint.className = 'muted';
