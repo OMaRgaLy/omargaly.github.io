@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { OPS, runChain, bytesToDisplay } from '../../assets/js/lab/lib/chain.js';
+import { OPS, OP_GROUPS, runChain, bytesToDisplay } from '../../assets/js/lab/lib/chain.js';
 import { utf8ToBytes } from '../../assets/js/lab/lib/encoding.js';
 
 const run = (text, steps) => runChain(utf8ToBytes(text), steps);
@@ -73,4 +73,9 @@ test('bytesToDisplay falls back to hex for invalid UTF-8', () => {
   const d = bytesToDisplay(new Uint8Array([0xff, 0xfe]));
   assert.equal(d.isText, false);
   assert.equal(d.text, 'fffe');
+});
+
+test('every op belongs to one of the palette groups and every group has ops', () => {
+  for (const [id, op] of Object.entries(OPS)) assert.ok(OP_GROUPS.includes(op.group), `${id} has no valid group`);
+  for (const g of OP_GROUPS) assert.ok(Object.values(OPS).some((op) => op.group === g), `group ${g} is empty`);
 });

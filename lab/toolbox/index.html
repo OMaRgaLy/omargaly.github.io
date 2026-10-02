@@ -49,6 +49,7 @@
 </div>
 
 <section class="panel" role="tabpanel" data-panel="jwt" id="panel-jwt" aria-labelledby="tab-jwt">
+  <p class="hint">Paste a JSON Web Token to read its header and payload. The result updates as you type.</p>
   <label class="field"><span>JWT</span>
     <textarea class="code" id="jwt-in" spellcheck="false" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."></textarea>
   </label>
@@ -62,57 +63,72 @@
 </section>
 
 <section class="panel" role="tabpanel" data-panel="base64" id="panel-base64" aria-labelledby="tab-base64" data-transform="base64" hidden>
-  <label class="field"><span>Input</span><textarea class="code" data-in spellcheck="false"></textarea></label>
-  <label class="field"><span><input type="checkbox" data-urlsafe> URL-safe alphabet when encoding</span></label>
-  <div class="btn-row">
-    <button class="btn btn--sm" type="button" data-act="encode">Encode</button>
-    <button class="btn btn--sm" type="button" data-act="decode">Decode</button>
-    <button class="btn btn--sm" type="button" data-act="copy">Copy output</button>
+  <div class="toolbar">
+    <fieldset class="seg">
+      <legend class="sr-only">Direction</legend>
+      <label><input type="radio" name="mode-base64" value="encode" checked><span>Encode</span></label>
+      <label><input type="radio" name="mode-base64" value="decode"><span>Decode</span></label>
+    </fieldset>
+    <label class="check"><input type="checkbox" data-urlsafe> URL-safe alphabet (encoding)</label>
   </div>
+  <label class="field"><span>Input</span><textarea class="code" data-in spellcheck="false" placeholder="Type or paste here. The result appears right away."></textarea></label>
   <p class="err" role="alert" data-err hidden></p>
+  <div class="out-head"><span>Output</span><button class="btn btn--sm" type="button" data-act="copy">Copy output</button></div>
   <pre class="out" data-out></pre>
 </section>
 
 <section class="panel" role="tabpanel" data-panel="url" id="panel-url" aria-labelledby="tab-url" data-transform="url" hidden>
-  <label class="field"><span>Input</span><textarea class="code" data-in spellcheck="false"></textarea></label>
-  <div class="btn-row">
-    <button class="btn btn--sm" type="button" data-act="encode">Encode</button>
-    <button class="btn btn--sm" type="button" data-act="decode">Decode</button>
-    <button class="btn btn--sm" type="button" data-act="copy">Copy output</button>
+  <div class="toolbar">
+    <fieldset class="seg">
+      <legend class="sr-only">Direction</legend>
+      <label><input type="radio" name="mode-url" value="encode" checked><span>Encode</span></label>
+      <label><input type="radio" name="mode-url" value="decode"><span>Decode</span></label>
+    </fieldset>
   </div>
+  <label class="field"><span>Input</span><textarea class="code" data-in spellcheck="false" placeholder="Type or paste here. The result appears right away."></textarea></label>
   <p class="err" role="alert" data-err hidden></p>
+  <div class="out-head"><span>Output</span><button class="btn btn--sm" type="button" data-act="copy">Copy output</button></div>
   <pre class="out" data-out></pre>
 </section>
 
 <section class="panel" role="tabpanel" data-panel="hex" id="panel-hex" aria-labelledby="tab-hex" data-transform="hex" hidden>
-  <label class="field"><span>Input</span><textarea class="code" data-in spellcheck="false"></textarea></label>
-  <div class="btn-row">
-    <button class="btn btn--sm" type="button" data-act="encode">Encode</button>
-    <button class="btn btn--sm" type="button" data-act="decode">Decode</button>
-    <button class="btn btn--sm" type="button" data-act="copy">Copy output</button>
+  <div class="toolbar">
+    <fieldset class="seg">
+      <legend class="sr-only">Direction</legend>
+      <label><input type="radio" name="mode-hex" value="encode" checked><span>Encode</span></label>
+      <label><input type="radio" name="mode-hex" value="decode"><span>Decode</span></label>
+    </fieldset>
   </div>
+  <label class="field"><span>Input</span><textarea class="code" data-in spellcheck="false" placeholder="Type or paste here. The result appears right away."></textarea></label>
   <p class="err" role="alert" data-err hidden></p>
+  <div class="out-head"><span>Output</span><button class="btn btn--sm" type="button" data-act="copy">Copy output</button></div>
   <pre class="out" data-out></pre>
 </section>
 
 <section class="panel" role="tabpanel" data-panel="uuid" id="panel-uuid" aria-labelledby="tab-uuid" hidden>
-  <div class="btn-row">
-    <label class="field"><span>How many (1-50)</span><input type="number" id="uuid-count" min="1" max="50" value="5"></label>
+  <div class="toolbar">
+    <fieldset class="seg">
+      <legend class="sr-only">UUID version</legend>
+      <label><input type="radio" name="uuid-version" value="v4" checked><span>v4 (random)</span></label>
+      <label><input type="radio" name="uuid-version" value="v7"><span>v7 (time-ordered)</span></label>
+    </fieldset>
+    <label class="inline-field">How many <input type="number" id="uuid-count" min="1" max="50" value="5"></label>
+    <button class="btn btn--sm btn--primary" type="button" id="uuid-new">Generate new</button>
   </div>
-  <div class="btn-row">
-    <button class="btn btn--sm" type="button" id="uuid-v4">Generate v4</button>
-    <button class="btn btn--sm" type="button" id="uuid-v7">Generate v7</button>
-    <button class="btn btn--sm" type="button" id="uuid-copy">Copy all</button>
-  </div>
+  <div class="out-head"><span>Output</span><button class="btn btn--sm" type="button" id="uuid-copy">Copy all</button></div>
   <pre class="out" id="uuid-out"></pre>
 </section>
 
 <section class="panel" role="tabpanel" data-panel="time" id="panel-time" aria-labelledby="tab-time" hidden>
-  <label class="field"><span>Unix seconds, milliseconds or a date</span>
+  <p class="hint">Paste a Unix timestamp (seconds or milliseconds) or a date, and see it in every format. It starts with the current time.</p>
+  <label class="field"><span>Timestamp or date</span>
     <input type="text" id="time-in" spellcheck="false" placeholder="1700000000 or 2023-11-14T22:13:20Z">
   </label>
   <div class="btn-row">
-    <button class="btn btn--sm" type="button" id="time-now">Now</button>
+    <button class="btn btn--sm" type="button" data-example="now">Now</button>
+    <button class="btn btn--sm" type="button" data-example="1700000000">1700000000</button>
+    <button class="btn btn--sm" type="button" data-example="1700000000000">1700000000000 (ms)</button>
+    <button class="btn btn--sm" type="button" data-example="2000-01-01T00:00:00Z">2000-01-01T00:00:00Z</button>
   </div>
   <p class="err" role="alert" id="time-err" hidden></p>
   <table class="table" id="time-table" hidden>
@@ -124,6 +140,9 @@
       <tr><th>Relative</th><td id="t-rel"></td></tr>
     </tbody>
   </table>
+  <label class="field"><span>Or pick a date and time (your time zone) to get its timestamp</span>
+    <input type="datetime-local" id="time-pick">
+  </label>
 </section>
 
 </main>

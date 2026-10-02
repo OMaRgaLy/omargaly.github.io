@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { parseTimestamp, relativeTime } from '../../assets/js/lab/lib/time.js';
+import { parseTimestamp, relativeTime, formatLocalInput } from '../../assets/js/lab/lib/time.js';
 
 test('seconds, milliseconds and ISO strings agree', () => {
   const a = parseTimestamp('1700000000');
@@ -32,4 +32,11 @@ test('relative time reads naturally in both directions', () => {
   assert.equal(relativeTime(now + 3 * 3600 * 1000, now), 'in 3 hours');
   assert.equal(relativeTime(now - 2 * 86400 * 1000, now), '2 days ago');
   assert.equal(relativeTime(now, now), 'now');
+});
+
+test('formatLocalInput renders a datetime-local value for a given UTC offset', () => {
+  // 2023-11-14T22:13:20Z seen from UTC+5 (getTimezoneOffset = -300) is 2023-11-15 03:13
+  assert.equal(formatLocalInput(1700000000000, -300), '2023-11-15T03:13');
+  assert.equal(formatLocalInput(1700000000000, 0), '2023-11-14T22:13');
+  assert.equal(formatLocalInput(1700000000000, 480), '2023-11-14T14:13');
 });

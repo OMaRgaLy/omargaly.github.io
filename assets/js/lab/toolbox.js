@@ -1,10 +1,10 @@
 import { $, $$, initLabPage, copyText, showError, setupTabs } from './common.js';
 import {
-  base64Encode, base64Decode, base64UrlEncode, hexEncode, hexDecode, urlEncode, urlDecode,
+  base64Encode, base64UrlEncode, hexEncode, urlEncode, urlDecode,
 } from './lib/encoding.js';
 import { decodeToDisplay } from './lib/transforms.js';
 import { decodeJwt } from './lib/jwt.js';
-import { parseTimestamp, relativeTime } from './lib/time.js';
+import { parseTimestamp, relativeTime, formatLocalInput } from './lib/time.js';
 import { uuidv4, uuidv7 } from './lib/uuid.js';
 
 initLabPage();
@@ -30,50 +30,61 @@ function renderJwt() {
 }
 jwtIn.addEventListener('input', renderJwt);
 
-// --- Base64 / URL / hex -----------------------------------------------
+// --- Base64 / URL / hex: live, direction chosen with a switch -----------------
 const TRANSFORMS = {
-  base64: { encode: (s, root) => ($('[data-urlsafe]', root).checked ? base64UrlEncode(s) : base64Encode(s)), decode: base64Decode },
+  base64: {
+    encode: (s, root) => ($('[data-urlsafe]', root).checked ? base64UrlEncode(s) : base64Encode(s)),
+    decode: (s) => displayDecoded(decodeToDisplay('base64', s)),
+  },
   url: { encode: urlEncode, decode: urlDecode },
-  hex: { encode: hexEncode, decode: hexDecode },
+  hex: { encode: hexEncode, decode: (s) => displayDecoded(decodeToDisplay('hex', s)) },
 };
+
+const displayDecoded = (d) => (d.isText ? d.text : `Not valid text. Bytes as hex: ${d.text}`);
 
 $$('[data-transform]').forEach((root) => {
   const t = TRANSFORMS[root.dataset.transform];
   const input = $('[data-in]', root);
   const out = $('[data-out]', root);
   const err = $('[data-err]', root);
-  root.addEventListener('click', (ev) => {
-    const act = ev.target instanceof HTMLElement ? ev.target.dataset.act : null;
-    if (!act) return;
-    if (act === 'copy') return copyText(out.textContent, ev.target);
+  const mode = () => $('input[type="radio"]:checked', root).value;
+
+  function update() {
+    if (!input.value) {
+      out.textContent = '';
+      return showError(err, null);
+    }
     try {
-      if (act === 'decode' && (root.dataset.transform === 'base64' || root.dataset.transform === 'hex')) {
-        const d = decodeToDisplay(root.dataset.transform, input.value);
-        out.textContent = d.isText ? d.text : `Not valid text. Bytes as hex: ${d.text}`;
-      } else {
-        out.textContent = t[act](input.value, root);
-      }
+      out.textContent = t[mode()](input.value, root);
       showError(err, null);
     } catch (e) {
       out.textContent = '';
       showError(err, e);
     }
-  });
+  }
+
+  input.addEventListener('input', update);
+  root.addEventListener('change', update); // direction switch and the URL-safe checkbox
+  $('[data-act="copy"]', root).addEventListener('click', (ev) => copyText(out.textContent, ev.target));
 });
 
 // --- UUID --------------------------------------------------------------
 const uuidOut = $('#uuid-out');
-function generate(make) {
+function generate() {
   const n = Math.min(50, Math.max(1, Number($('#uuid-count').value) || 1));
+  const make = $('input[name="uuid-version"]:checked').value === 'v7' ? () => uuidv7() : uuidv4;
   uuidOut.textContent = Array.from({ length: n }, () => make()).join('\n');
 }
-$('#uuid-v4').addEventListener('click', () => generate(uuidv4));
-$('#uuid-v7').addEventListener('click', () => generate(() => uuidv7()));
+$('#uuid-new').addEventListener('click', generate);
+$$('input[name="uuid-version"]').forEach((r) => r.addEventListener('change', generate));
+$('#uuid-count').addEventListener('input', generate);
 $('#uuid-copy').addEventListener('click', (ev) => copyText(uuidOut.textContent, ev.target));
-generate(uuidv4);
+generate();
 
 // --- Timestamp ---------------------------------------------------------
 const timeIn = $('#time-in');
+const timePick = $('#time-pick');
+
 function renderTime() {
   const table = $('#time-table');
   table.hidden = true;
@@ -85,14 +96,25 @@ function renderTime() {
     $('#t-iso').textContent = r.iso;
     $('#t-local').textContent = new Date(r.milliseconds).toString();
     $('#t-rel').textContent = relativeTime(r.milliseconds);
+    timePick.value = formatLocalInput(r.milliseconds);
     table.hidden = false;
     showError($('#time-err'), null);
   } catch (err) {
     showError($('#time-err'), err);
   }
 }
+
+function setTime(value) {
+  timeIn.value = value === 'now' ? String(Math.floor(Date.now() / 1000)) : value;
+  renderTime();
+}
+
 timeIn.addEventListener('input', renderTime);
-$('#time-now').addEventListener('click', () => {
-  timeIn.value = String(Math.floor(Date.now() / 1000));
+$$('[data-example]').forEach((b) => b.addEventListener('click', () => setTime(b.dataset.example)));
+timePick.addEventListener('input', () => {
+  const ms = new Date(timePick.value).getTime();
+  if (Number.isNaN(ms)) return;
+  timeIn.value = String(Math.floor(ms / 1000));
   renderTime();
 });
+setTime('now');

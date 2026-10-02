@@ -29,3 +29,8 @@ export function relativeTime(ms, now = Date.now()) {
     if (Math.abs(diff) >= size || unit === 'second') return rtf.format(Math.round(diff / size), unit);
   }
 }
+
+// Value for an <input type="datetime-local">: the local wall-clock time as YYYY-MM-DDTHH:mm.
+export function formatLocalInput(ms, tzOffsetMinutes = new Date(ms).getTimezoneOffset()) {
+  return new Date(ms - tzOffsetMinutes * 60000).toISOString().slice(0, 16);
+}

@@ -11,16 +11,18 @@ function keyBytes(key) {
   return /^0x[0-9a-f]+$/i.test(key) ? hexToBytes(key) : utf8ToBytes(key);
 }
 
+export const OP_GROUPS = ['Encode / decode', 'Ciphers', 'Text'];
+
 export const OPS = {
-  'base64-encode': { label: 'Base64 encode', params: [], run: (b) => fromText(bytesToBase64(b)) },
-  'base64-decode': { label: 'Base64 decode', params: [], run: (b) => base64ToBytes(text(b)) },
-  'hex-encode': { label: 'Hex encode', params: [], run: (b) => fromText(bytesToHex(b)) },
-  'hex-decode': { label: 'Hex decode', params: [], run: (b) => hexToBytes(text(b)) },
-  'url-encode': { label: 'URL encode', params: [], run: (b) => fromText(urlEncode(text(b))) },
-  'url-decode': { label: 'URL decode', params: [], run: (b) => fromText(urlDecode(text(b))) },
-  'binary-encode': { label: 'Binary encode', params: [], run: (b) => fromText([...b].map((x) => x.toString(2).padStart(8, '0')).join(' ')) },
+  'base64-encode': { label: 'Base64 encode', group: 'Encode / decode', params: [], run: (b) => fromText(bytesToBase64(b)) },
+  'base64-decode': { label: 'Base64 decode', group: 'Encode / decode', params: [], run: (b) => base64ToBytes(text(b)) },
+  'hex-encode': { label: 'Hex encode', group: 'Encode / decode', params: [], run: (b) => fromText(bytesToHex(b)) },
+  'hex-decode': { label: 'Hex decode', group: 'Encode / decode', params: [], run: (b) => hexToBytes(text(b)) },
+  'url-encode': { label: 'URL encode', group: 'Encode / decode', params: [], run: (b) => fromText(urlEncode(text(b))) },
+  'url-decode': { label: 'URL decode', group: 'Encode / decode', params: [], run: (b) => fromText(urlDecode(text(b))) },
+  'binary-encode': { label: 'Binary encode', group: 'Encode / decode', params: [], run: (b) => fromText([...b].map((x) => x.toString(2).padStart(8, '0')).join(' ')) },
   'binary-decode': {
-    label: 'Binary decode',
+    label: 'Binary decode', group: 'Encode / decode',
     params: [],
     run: (b) => {
       const groups = text(b).trim().split(/\s+/).filter(Boolean);
@@ -28,26 +30,26 @@ export const OPS = {
       return Uint8Array.from(groups, (g) => parseInt(g, 2));
     },
   },
-  rot13: { label: 'ROT13', params: [], run: (b) => fromText(rot13(text(b))) },
+  rot13: { label: 'ROT13', group: 'Ciphers', params: [], run: (b) => fromText(rot13(text(b))) },
   caesar: {
-    label: 'Caesar shift',
+    label: 'Caesar shift', group: 'Ciphers',
     params: [{ name: 'shift', label: 'Shift', type: 'number', default: 3 }],
     run: (b, p) => fromText(caesar(text(b), Number(p.shift ?? 3))),
   },
-  atbash: { label: 'Atbash', params: [], run: (b) => fromText(atbash(text(b))) },
-  reverse: { label: 'Reverse', params: [], run: (b) => fromText([...text(b)].reverse().join('')) },
-  upper: { label: 'Upper case', params: [], run: (b) => fromText(text(b).toUpperCase()) },
-  lower: { label: 'Lower case', params: [], run: (b) => fromText(text(b).toLowerCase()) },
+  atbash: { label: 'Atbash', group: 'Ciphers', params: [], run: (b) => fromText(atbash(text(b))) },
+  reverse: { label: 'Reverse', group: 'Text', params: [], run: (b) => fromText([...text(b)].reverse().join('')) },
+  upper: { label: 'Upper case', group: 'Text', params: [], run: (b) => fromText(text(b).toUpperCase()) },
+  lower: { label: 'Lower case', group: 'Text', params: [], run: (b) => fromText(text(b).toLowerCase()) },
   xor: {
-    label: 'XOR with key',
+    label: 'XOR with key', group: 'Ciphers',
     params: [{ name: 'key', label: 'Key (text or 0x hex)', type: 'text', default: '' }],
     run: (b, p) => {
       const k = keyBytes(p.key);
       return Uint8Array.from(b, (x, i) => x ^ k[i % k.length]);
     },
   },
-  'morse-encode': { label: 'Morse encode', params: [], run: (b) => fromText(morseEncode(text(b))) },
-  'morse-decode': { label: 'Morse decode', params: [], run: (b) => fromText(morseDecode(text(b))) },
+  'morse-encode': { label: 'Morse encode', group: 'Encode / decode', params: [], run: (b) => fromText(morseEncode(text(b))) },
+  'morse-decode': { label: 'Morse decode', group: 'Encode / decode', params: [], run: (b) => fromText(morseDecode(text(b))) },
 };
 
 export function runChain(inputBytes, steps) {
