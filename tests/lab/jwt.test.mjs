@@ -40,3 +40,16 @@ test('rejects parts that are not Base64URL JSON', () => {
   assert.throws(() => decodeJwt('!!!.e30.sig'), /header is not valid/);
   assert.throws(() => decodeJwt('e30.@@@.sig'), /payload is not valid/);
 });
+
+test('rejects a header or payload that is not a JSON object', () => {
+  const part = (s) => base64UrlEncode(s);
+  assert.throws(() => decodeJwt(`${part('{}')}.${part('null')}.x`), /payload is not a JSON object/);
+  assert.throws(() => decodeJwt(`${part('{}')}.${part('[1]')}.x`), /payload is not a JSON object/);
+  assert.throws(() => decodeJwt(`${part('"s"')}.${part('{}')}.x`), /header is not a JSON object/);
+});
+
+test('an exp outside the Date range does not crash', () => {
+  const r = decodeJwt(make({ alg: 'none' }, { exp: 1e20 }));
+  assert.equal(r.expiresAt, null);
+  assert.equal(r.expired, false);
+});

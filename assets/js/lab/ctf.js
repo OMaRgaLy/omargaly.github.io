@@ -19,7 +19,9 @@ function renderList() {
   for (const c of challenges) {
     const box = document.createElement('div');
     box.className = 'challenge';
+    box.dataset.id = c.id;
     const h = document.createElement('h2');
+    h.tabIndex = -1;
     h.textContent = `${solved.includes(c.id) ? '✓ ' : ''}${c.title}`;
     const hint = document.createElement('p');
     hint.className = 'muted';
@@ -41,6 +43,7 @@ function renderList() {
       btn.textContent = 'Check';
       const msg = document.createElement('p');
       msg.className = 'err';
+      msg.setAttribute('role', 'alert');
       msg.hidden = true;
       row.append(input, btn);
       row.addEventListener('submit', async (ev) => {
@@ -49,6 +52,7 @@ function renderList() {
           solved = markSolved(solved, c.id);
           writeStored(KEY, JSON.stringify(solved));
           renderAll();
+          $(`.challenge[data-id="${c.id}"] h2`)?.focus();
         } else {
           msg.textContent = 'Not quite. Keep looking.';
           msg.hidden = false;

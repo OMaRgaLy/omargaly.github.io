@@ -69,3 +69,10 @@ test('sitemap lists the three language URLs', () => {
     assert.ok(xml.includes(`<loc>${u}</loc>`), u);
   }
 });
+
+test('the logo link has an accessible name that contains its visible text', () => {
+  for (const html of [en, ru, kz]) {
+    const m = html.match(/class="logo"[^>]*aria-label="([^"]*)"/);
+    assert.ok(m && m[1].includes('ob_'), 'logo aria-label must contain the visible text');
+  }
+});

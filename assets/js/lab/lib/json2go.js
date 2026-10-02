@@ -53,7 +53,8 @@ function merge(a, b) {
   return 'any';
 }
 
-export function jsonToGo(jsonText, { rootName = 'Root' } = {}) {
+export function jsonToGo(jsonText, { rootName: requestedRoot = 'Root' } = {}) {
+  const rootName = /[A-Za-z0-9]/.test(requestedRoot) ? toGoName(requestedRoot) : 'Root';
   let value;
   try {
     value = JSON.parse(jsonText);
@@ -82,10 +83,12 @@ export function jsonToGo(jsonText, { rootName = 'Root' } = {}) {
       for (let i = 2; seen.has(goName); i++) goName = `${toGoName(key)}${i}`;
       seen.add(goName);
       const optional = f.count < type.total || undefined;
+      const tagText = `json:"${key.replace(/\\/g, '\\\\').replace(/"/g, '\\"')}${optional ? ',omitempty' : ''}"`;
       entry.fields.push({
         goName,
         goType: goType(f.type, toGoName(key)),
-        tag: `json:"${key}${optional ? ',omitempty' : ''}"`,
+        // struct tags are raw strings; a backtick in a key needs the quoted form instead
+        tag: tagText.includes('`') ? JSON.stringify(tagText) : `\`${tagText}\``,
       });
     }
     return name;
@@ -102,13 +105,50 @@ export function jsonToGo(jsonText, { rootName = 'Root' } = {}) {
     const nameW = Math.max(...s.fields.map((f) => f.goName.length), 0);
     const typeW = Math.max(...s.fields.map((f) => f.goType.length), 0);
     lines.push(`type ${s.name} struct {`);
-    for (const f of s.fields) lines.push(`\t${f.goName.padEnd(nameW)} ${f.goType.padEnd(typeW)} \`${f.tag}\``);
+    for (const f of s.fields) lines.push(`\t${f.goName.padEnd(nameW)} ${f.goType.padEnd(typeW)} ${f.tag}`);
     lines.push('}', '');
   }
   return lines.join('\n').replace(/\n\n$/, '\n');
 }
 
 // --- Go -> JSON ---------------------------------------------------------
+
+const jsonName = (tag, goName) => (tag ? tag.split(',')[0] || goName : goName);
+const braceDelta = (line) => (line.match(/\{/g) ?? []).length - (line.match(/\}/g) ?? []).length;
+
+// Parses the lines of a struct body. Anonymous nested structs are registered as synthetic
+// types named "Owner.Field" so they stay nested instead of leaking their fields upwards.
+function parseBody(lines, owner, structs) {
+  const fields = [];
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i].replace(/\/\/.*$/, '').trim();
+    const anon = line.match(/^(\w+)\s+struct\s*\{\s*$/);
+    if (anon) {
+      let depth = 1;
+      const inner = [];
+      let closing = '';
+      for (i += 1; i < lines.length && depth > 0; i++) {
+        depth += braceDelta(lines[i]);
+        if (depth > 0) inner.push(lines[i]);
+        else closing = lines[i];
+      }
+      i -= 1;
+      const tag = closing.match(/json:"([^"]*)"/)?.[1];
+      if (tag === '-') continue;
+      const typeName = `${owner}.${anon[1]}`;
+      structs.set(typeName, []);
+      structs.set(typeName, parseBody(inner, typeName, structs));
+      fields.push({ name: jsonName(tag, anon[1]), type: typeName });
+      continue;
+    }
+    const f = line.match(/^(\w+)\s+(\S+)(?:\s+`([^`]*)`)?/);
+    if (!f) continue;
+    const tag = f[3]?.match(/json:"([^"]*)"/)?.[1];
+    if (tag === '-') continue;
+    fields.push({ name: jsonName(tag, f[1]), type: f[2] });
+  }
+  return fields;
+}
 
 function parseStructs(src) {
   const structs = new Map();
@@ -121,17 +161,8 @@ function parseStructs(src) {
       else if (src[end] === '}') depth -= 1;
       end += 1;
     }
-    const fields = [];
-    for (const raw of src.slice(start, end - 1).split('\n')) {
-      const line = raw.replace(/\/\/.*$/, '').trim();
-      const f = line.match(/^(\w+)\s+(\S+)(?:\s+`([^`]*)`)?/);
-      if (!f) continue;
-      const tag = f[3]?.match(/json:"([^"]*)"/)?.[1];
-      if (tag === '-') continue;
-      const name = tag ? tag.split(',')[0] || f[1] : f[1];
-      fields.push({ name, type: f[2] });
-    }
-    structs.set(m[1], fields);
+    structs.set(m[1], []); // reserve the slot first so the first declared struct stays the root
+    structs.set(m[1], parseBody(src.slice(start, end - 1).split('\n'), m[1], structs));
   }
   return structs;
 }

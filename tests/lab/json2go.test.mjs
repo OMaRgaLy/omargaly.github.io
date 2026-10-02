@@ -142,3 +142,27 @@ test('goToJson still expands the same struct type used in sibling fields', () =>
   const out = goToJson('type A struct {\n\tX B `json:"x"`\n\tY B `json:"y"`\n}\ntype B struct {\n\tV int `json:"v"`\n}');
   assert.deepEqual(JSON.parse(out), { x: { v: 0 }, y: { v: 0 } });
 });
+
+test('root names are turned into valid Go identifiers', () => {
+  assert.match(jsonToGo('{"a":1}', { rootName: 'my root' }), /^type MyRoot struct \{/);
+  assert.match(jsonToGo('{"a":1}', { rootName: '9lives' }), /^type X9lives struct \{/);
+  assert.match(jsonToGo('{"a":1}', { rootName: '   ' }), /^type Root struct \{/);
+});
+
+test('keys with quotes, backslashes or backticks produce a valid struct tag', () => {
+  assert.match(jsonToGo(JSON.stringify({ 'a"b': 1 })), /`json:"a\\"b"`/);
+  assert.match(jsonToGo(JSON.stringify({ 'a\\b': 1 })), /`json:"a\\\\b"`/);
+  assert.match(jsonToGo(JSON.stringify({ 'a`b': 1 })), /"json:\\"a`b\\""/);
+});
+
+test('goToJson keeps anonymous nested structs nested', () => {
+  const src = [
+    'type Root struct {',
+    '\tInner struct {',
+    '\t\tY int `json:"y"`',
+    '\t} `json:"inner"`',
+    '\tZ int `json:"z"`',
+    '}',
+  ].join('\n');
+  assert.deepEqual(JSON.parse(goToJson(src)), { inner: { y: 0 }, z: 0 });
+});

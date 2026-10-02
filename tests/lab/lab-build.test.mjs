@@ -46,3 +46,12 @@ test('home page links to the lab', () => {
     assert.ok(pages.get(p).includes('href="/lab/"'), p);
   }
 });
+
+test('lab pages tell visitors without JavaScript what is going on and have a well-named logo', () => {
+  for (const [path, html] of pages) {
+    if (!path.startsWith('lab/')) continue;
+    assert.match(html, /<noscript>[^<]*JavaScript[^<]*<\/noscript>/, `noscript missing in ${path}`);
+    const m = html.match(/class="logo"[^>]*aria-label="([^"]*)"/);
+    assert.ok(m && m[1].includes('ob_'), `logo label in ${path}`);
+  }
+});

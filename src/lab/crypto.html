@@ -1,11 +1,11 @@
 <div class="tabs" role="tablist" aria-label="Crypto kit">
-  <button class="tab" type="button" role="tab" data-tab="chain">Chain</button>
-  <button class="tab" type="button" role="tab" data-tab="ciphers">Ciphers</button>
-  <button class="tab" type="button" role="tab" data-tab="hashes">Hashes</button>
-  <button class="tab" type="button" role="tab" data-tab="detect">Detect</button>
+  <button class="tab" type="button" role="tab" data-tab="chain" id="tab-chain" aria-controls="panel-chain">Chain</button>
+  <button class="tab" type="button" role="tab" data-tab="ciphers" id="tab-ciphers" aria-controls="panel-ciphers">Ciphers</button>
+  <button class="tab" type="button" role="tab" data-tab="hashes" id="tab-hashes" aria-controls="panel-hashes">Hashes</button>
+  <button class="tab" type="button" role="tab" data-tab="detect" id="tab-detect" aria-controls="panel-detect">Detect</button>
 </div>
 
-<section class="panel" role="tabpanel" data-panel="chain">
+<section class="panel" role="tabpanel" data-panel="chain" id="panel-chain" aria-labelledby="tab-chain">
   <label class="field"><span>Input</span><textarea class="code" id="chain-in" spellcheck="false" rows="5"></textarea></label>
   <div class="steps" id="chain-steps"></div>
   <div class="btn-row">
@@ -14,12 +14,12 @@
     <button class="btn btn--sm" type="button" id="chain-clear">Clear steps</button>
     <button class="btn btn--sm" type="button" id="chain-copy">Copy output</button>
   </div>
-  <p class="err" id="chain-err" hidden></p>
+  <p class="err" role="alert" id="chain-err" hidden></p>
   <pre class="out" id="chain-out"></pre>
   <p class="muted" id="chain-note"></p>
 </section>
 
-<section class="panel" role="tabpanel" data-panel="ciphers" hidden>
+<section class="panel" role="tabpanel" data-panel="ciphers" id="panel-ciphers" aria-labelledby="tab-ciphers" hidden>
   <label class="field"><span>Cipher</span>
     <select id="cipher">
       <option value="caesar">Caesar</option>
@@ -37,7 +37,7 @@
     <button class="btn btn--sm btn--primary" type="button" id="cipher-crack">Crack</button>
     <button class="btn btn--sm" type="button" id="cipher-copy">Copy output</button>
   </div>
-  <p class="err" id="cipher-err" hidden></p>
+  <p class="err" role="alert" id="cipher-err" hidden></p>
   <pre class="out" id="cipher-out"></pre>
   <table class="table" id="cipher-table" hidden>
     <thead><tr><th>Shift</th><th>Plaintext</th></tr></thead>
@@ -45,19 +45,19 @@
   </table>
 </section>
 
-<section class="panel" role="tabpanel" data-panel="hashes" hidden>
+<section class="panel" role="tabpanel" data-panel="hashes" id="panel-hashes" aria-labelledby="tab-hashes" hidden>
   <label class="field"><span>Text</span><textarea class="code" id="hash-in" spellcheck="false" rows="4"></textarea></label>
   <label class="field"><span>HMAC key (optional; leave empty for a plain hash)</span><input type="text" id="hash-key" spellcheck="false"></label>
   <div class="btn-row"><button class="btn btn--sm btn--primary" type="button" id="hash-run">Compute</button></div>
-  <p class="err" id="hash-err" hidden></p>
+  <p class="err" role="alert" id="hash-err" hidden></p>
   <table class="table" id="hash-table" hidden>
     <thead><tr><th>Algorithm</th><th>Digest (hex)</th></tr></thead>
     <tbody></tbody>
   </table>
 </section>
 
-<section class="panel" role="tabpanel" data-panel="detect" hidden>
+<section class="panel" role="tabpanel" data-panel="detect" id="panel-detect" aria-labelledby="tab-detect" hidden>
   <label class="field"><span>Mystery string</span><textarea class="code" id="detect-in" spellcheck="false" rows="4"></textarea></label>
-  <ul class="repo-list" id="detect-out"></ul>
+  <ul class="repo-list" id="detect-out" aria-live="polite"></ul>
   <p class="muted" id="detect-empty"></p>
 </section>

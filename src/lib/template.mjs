@@ -9,14 +9,13 @@ export function lookup(obj, path) {
 }
 
 export function render(tpl, strings, raw = {}) {
-  return tpl
-    .replace(/\{\{\{\s*([\w.]+)\s*\}\}\}/g, (_, k) => {
-      if (!(k in raw)) throw new Error(`Missing raw fragment: ${k}`);
-      return raw[k];
-    })
-    .replace(/\{\{\s*([\w.]+)\s*\}\}/g, (_, k) => {
-      const v = lookup(strings, k);
-      if (typeof v !== 'string') throw new Error(`Missing string: ${k}`);
-      return escapeHtml(v);
-    });
+  return tpl.replace(/\{\{\{\s*([\w.]+)\s*\}\}\}|\{\{\s*([\w.]+)\s*\}\}/g, (_, rawKey, key) => {
+    if (rawKey !== undefined) {
+      if (!(rawKey in raw)) throw new Error(`Missing raw fragment: ${rawKey}`);
+      return raw[rawKey];
+    }
+    const v = lookup(strings, key);
+    if (typeof v !== 'string') throw new Error(`Missing string: ${key}`);
+    return escapeHtml(v);
+  });
 }

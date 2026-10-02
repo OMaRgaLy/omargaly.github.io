@@ -132,3 +132,8 @@ test('cachedAll settles every request so one failure does not hide the others', 
     assert.match(r[1].error, /GitHub API error 500/);
   });
 });
+
+test('activityByDay ignores non-numeric push sizes', () => {
+  const a = activityByDay([{ type: 'PushEvent', created_at: '2026-10-02T00:00:00Z', payload: { size: '<svg onload=x>' } }]);
+  assert.deepEqual(a.byDate, { '2026-10-02': 1 });
+});

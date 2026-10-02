@@ -44,16 +44,21 @@ export function setupTabs(root = document) {
       p.hidden = p.dataset.panel !== id;
     });
   };
+  const activate = (tab, focus = false) => {
+    select(tab.dataset.tab, focus);
+    history.replaceState(null, '', `#${tab.dataset.tab}`);
+  };
   tabs.forEach((t, i) => {
-    t.addEventListener('click', () => {
-      select(t.dataset.tab);
-      history.replaceState(null, '', `#${t.dataset.tab}`);
-    });
+    t.addEventListener('click', () => activate(t));
     t.addEventListener('keydown', (ev) => {
-      if (ev.key !== 'ArrowRight' && ev.key !== 'ArrowLeft') return;
+      let next;
+      if (ev.key === 'ArrowRight') next = tabs[(i + 1) % tabs.length];
+      else if (ev.key === 'ArrowLeft') next = tabs[(i - 1 + tabs.length) % tabs.length];
+      else if (ev.key === 'Home') next = tabs[0];
+      else if (ev.key === 'End') next = tabs[tabs.length - 1];
+      else return;
       ev.preventDefault();
-      const next = tabs[(i + (ev.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length];
-      select(next.dataset.tab, true);
+      activate(next, true);
     });
   });
   const wanted = location.hash.slice(1);

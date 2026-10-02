@@ -28,7 +28,7 @@
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header">
   <div class="container site-header__inner">
-    <a class="logo" href="/" aria-label="Home">o<span>b</span>_</a>
+    <a class="logo" href="/" aria-label="ob_ — Home">o<span>b</span>_</a>
     <nav class="lab-nav" aria-label="Lab"><a href="/lab/">Lab</a></nav>
     <button class="icon-btn" type="button" data-theme-toggle aria-label="Toggle theme"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.4 5.4 0 0 1-4.4 2.26 5.4 5.4 0 0 1-5.4-5.4c0-1.8.88-3.4 2.24-4.4A9.1 9.1 0 0 0 12 3z"/></svg></button>
   </div>
@@ -37,6 +37,7 @@
 <main id="main" class="container lab">
   <p class="lab-back"><a href="/lab/">← Lab</a></p>
   <h1 class="lab-title">JSON ⇄ Go</h1>
+  <noscript>These tools run in your browser and need JavaScript enabled.</noscript>
   <p class="lab-intro">Turn JSON into Go structs with json tags, or a Go struct back into sample JSON.</p>
   <section class="panel">
   <div class="row2">
@@ -55,7 +56,7 @@
     <button class="btn btn--sm" type="button" id="copy-json">Copy JSON</button>
     <button class="btn btn--sm" type="button" id="example">Load example</button>
   </div>
-  <p class="err" id="err" hidden></p>
+  <p class="err" role="alert" id="err" hidden></p>
   <p class="muted">Go → JSON understands plain structs: strings, numbers, bools, slices, maps, pointers, <code>time.Time</code> and nested struct types. Fields tagged <code>json:"-"</code> are skipped.</p>
 </section>
 

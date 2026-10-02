@@ -30,3 +30,7 @@ test('render throws on a non-string value', () => {
 test('render throws on a missing raw fragment', () => {
   assert.throws(() => render('{{{x}}}', {}, {}), /Missing raw fragment: x/);
 });
+
+test('inserted raw fragments are not scanned for placeholders again', () => {
+  assert.equal(render('{{{x}}}', { a: '1' }, { x: '{{a}}' }), '{{a}}');
+});

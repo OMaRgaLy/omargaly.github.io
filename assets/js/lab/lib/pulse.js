@@ -61,7 +61,7 @@ export function activityByDay(events) {
     const t = Date.parse(ev.created_at);
     if (Number.isNaN(t)) continue;
     const day = new Date(t).toISOString().slice(0, 10);
-    const n = ev.type === 'PushEvent' ? ev.payload?.size || 1 : 1;
+    const n = ev.type === 'PushEvent' ? Number(ev.payload?.size) || 1 : 1;
     byDate[day] = (byDate[day] ?? 0) + n;
     total += n;
   }

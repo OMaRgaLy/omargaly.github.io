@@ -2,6 +2,7 @@ import { $, $$, initLabPage, copyText, showError, setupTabs } from './common.js'
 import {
   base64Encode, base64Decode, base64UrlEncode, hexEncode, hexDecode, urlEncode, urlDecode,
 } from './lib/encoding.js';
+import { decodeToDisplay } from './lib/transforms.js';
 import { decodeJwt } from './lib/jwt.js';
 import { parseTimestamp, relativeTime } from './lib/time.js';
 import { uuidv4, uuidv7 } from './lib/uuid.js';
@@ -46,7 +47,12 @@ $$('[data-transform]').forEach((root) => {
     if (!act) return;
     if (act === 'copy') return copyText(out.textContent, ev.target);
     try {
-      out.textContent = t[act](input.value, root);
+      if (act === 'decode' && (root.dataset.transform === 'base64' || root.dataset.transform === 'hex')) {
+        const d = decodeToDisplay(root.dataset.transform, input.value);
+        out.textContent = d.isText ? d.text : `Not valid text. Bytes as hex: ${d.text}`;
+      } else {
+        out.textContent = t[act](input.value, root);
+      }
       showError(err, null);
     } catch (e) {
       out.textContent = '';
