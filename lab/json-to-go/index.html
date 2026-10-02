@@ -40,24 +40,28 @@
   <noscript>These tools run in your browser and need JavaScript enabled.</noscript>
   <p class="lab-intro">Turn JSON into Go structs with json tags, or a Go struct back into sample JSON.</p>
   <section class="panel">
-  <div class="row2">
-    <label class="field"><span>JSON</span>
-      <textarea class="code" id="j-in" spellcheck="false" rows="14" placeholder='{"user_id": 1, "name": "Omar", "tags": ["go", "ai"]}'></textarea>
-    </label>
-    <label class="field"><span>Go</span>
-      <textarea class="code" id="g-in" spellcheck="false" rows="14" placeholder="type Root struct { ... }"></textarea>
-    </label>
-  </div>
-  <label class="field"><span>Root type name</span><input type="text" id="root-name" value="Root" spellcheck="false"></label>
-  <div class="btn-row">
-    <button class="btn btn--sm btn--primary" type="button" id="to-go">JSON → Go</button>
-    <button class="btn btn--sm btn--primary" type="button" id="to-json">Go → JSON</button>
-    <button class="btn btn--sm" type="button" id="copy-go">Copy Go</button>
-    <button class="btn btn--sm" type="button" id="copy-json">Copy JSON</button>
+  <p class="hint">Pick a direction, paste the input on the left and the result appears on the right as you type.</p>
+  <div class="toolbar">
+    <fieldset class="seg">
+      <legend class="sr-only">Direction</legend>
+      <label><input type="radio" name="mode" value="json2go" checked><span>JSON → Go</span></label>
+      <label><input type="radio" name="mode" value="go2json"><span>Go → JSON</span></label>
+    </fieldset>
+    <label class="inline-field" id="root-wrap">Root type name <input type="text" id="root-name" value="Root" spellcheck="false"></label>
+    <button class="btn btn--sm" type="button" id="swap">Swap</button>
     <button class="btn btn--sm" type="button" id="example">Load example</button>
   </div>
+  <div class="row2">
+    <label class="field"><span id="in-label">Input: JSON</span>
+      <textarea class="code" id="in" spellcheck="false" rows="16"></textarea>
+    </label>
+    <label class="field"><span id="out-label">Output: Go</span>
+      <textarea class="code" id="out" spellcheck="false" rows="16" readonly></textarea>
+    </label>
+  </div>
   <p class="err" role="alert" id="err" hidden></p>
-  <p class="muted">Go → JSON understands plain structs: strings, numbers, bools, slices, maps, pointers, <code>time.Time</code> and nested struct types. Fields tagged <code>json:"-"</code> are skipped.</p>
+  <div class="btn-row"><button class="btn btn--sm btn--primary" type="button" id="copy">Copy output</button></div>
+  <p class="muted" id="note"></p>
 </section>
 
 </main>

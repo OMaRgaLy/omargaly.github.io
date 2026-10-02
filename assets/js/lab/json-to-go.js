@@ -3,11 +3,11 @@ import { jsonToGo, goToJson } from './lib/json2go.js';
 
 initLabPage();
 
-const jsonBox = $('#j-in');
-const goBox = $('#g-in');
+const input = $('#in');
+const output = $('#out');
 const err = $('#err');
 
-const EXAMPLE = JSON.stringify(
+const EXAMPLE_JSON = JSON.stringify(
   {
     id: 42,
     user_id: 7,
@@ -23,32 +23,74 @@ const EXAMPLE = JSON.stringify(
   2,
 );
 
-function toGo() {
+const MODES = {
+  json2go: {
+    inLabel: 'Input: JSON',
+    outLabel: 'Output: Go',
+    placeholder: '{"user_id": 1, "name": "Omar", "tags": ["go", "ai"]}',
+    note: 'Fields that are missing in some array items get omitempty. Numbers become int or float64, null becomes interface{}.',
+    convert: (text) => jsonToGo(text, { rootName: $('#root-name').value.trim() || 'Root' }),
+    example: () => EXAMPLE_JSON,
+  },
+  go2json: {
+    inLabel: 'Input: Go',
+    outLabel: 'Output: JSON',
+    placeholder: 'type Root struct {\n\tID   int    `json:"id"`\n\tName string `json:"name"`\n}',
+    note: 'Understands plain structs: strings, numbers, bools, slices, maps, pointers, time.Time and nested struct types. Fields tagged json:"-" are skipped.',
+    convert: goToJson,
+    example: () => jsonToGo(EXAMPLE_JSON),
+  },
+};
+
+const mode = () => $('input[name="mode"]:checked').value;
+
+function convert() {
+  const m = MODES[mode()];
+  if (!input.value.trim()) {
+    output.value = '';
+    return showError(err, null);
+  }
   try {
-    goBox.value = jsonToGo(jsonBox.value, { rootName: $('#root-name').value.trim() || 'Root' });
+    output.value = m.convert(input.value);
     showError(err, null);
   } catch (e) {
+    output.value = '';
     showError(err, e);
   }
 }
 
-function toJson() {
-  try {
-    jsonBox.value = goToJson(goBox.value);
-    showError(err, null);
-  } catch (e) {
-    showError(err, e);
-  }
+function syncUi() {
+  const m = MODES[mode()];
+  $('#in-label').textContent = m.inLabel;
+  $('#out-label').textContent = m.outLabel;
+  input.placeholder = m.placeholder;
+  $('#note').textContent = m.note;
+  $('#root-wrap').hidden = mode() !== 'json2go';
 }
 
-$('#to-go').addEventListener('click', toGo);
-$('#to-json').addEventListener('click', toJson);
-$('#copy-go').addEventListener('click', (ev) => copyText(goBox.value, ev.target));
-$('#copy-json').addEventListener('click', (ev) => copyText(jsonBox.value, ev.target));
+document.querySelectorAll('input[name="mode"]').forEach((r) =>
+  r.addEventListener('change', () => {
+    syncUi();
+    convert();
+  }),
+);
+input.addEventListener('input', convert);
+$('#root-name').addEventListener('input', convert);
+
+$('#swap').addEventListener('click', () => {
+  const result = output.value;
+  const next = mode() === 'json2go' ? 'go2json' : 'json2go';
+  $(`input[name="mode"][value="${next}"]`).checked = true;
+  syncUi();
+  input.value = result;
+  convert();
+});
+
 $('#example').addEventListener('click', () => {
-  jsonBox.value = EXAMPLE;
-  toGo();
+  input.value = MODES[mode()].example();
+  convert();
 });
-jsonBox.addEventListener('keydown', (ev) => {
-  if ((ev.ctrlKey || ev.metaKey) && ev.key === 'Enter') toGo();
-});
+
+$('#copy').addEventListener('click', (ev) => copyText(output.value, ev.target));
+
+syncUi();
