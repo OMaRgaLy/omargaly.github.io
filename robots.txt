@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://omargaly.github.io/sitemap.xml
