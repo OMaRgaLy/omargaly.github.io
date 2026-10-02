@@ -80,17 +80,12 @@ const alternates = (site) =>
 const jsonForScript = (obj) => JSON.stringify(obj).replace(/</g, '\\u003c');
 
 const sitemap = (site, extraPaths = []) =>
-  `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${[
+  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${[
     ...LANGS.map((l) => URL_PATH[l]),
     ...extraPaths,
   ]
     .map((p) => `  <url><loc>${site.origin}${p}</loc></url>`)
-    .join('
-')}
-</urlset>
-`;
+    .join('\n')}\n</urlset>\n`;
 
 export async function build({ now = new Date() } = {}) {
   const [site, homeTpl, notFoundTpl, headScript] = await Promise.all([

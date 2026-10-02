@@ -1,27 +1,24 @@
 <!doctype html>
 <html lang="en" data-lang="en">
-
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>404 — Page not found</title>
-  <meta name="robots" content="noindex">
-  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
-  <script>
-    (function () { var d = document.documentElement; d.classList.add('js'); try { var t = localStorage.getItem('theme'); if (t !== 'light' && t !== 'dark') { t = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark' } d.dataset.theme = t; var l = localStorage.getItem('lang'); if ((l === 'ru' || l === 'kz') && location.pathname === '/') { location.replace('/' + l + '/') } } catch (e) { } })();
-  </script>
-  <link rel="stylesheet" href="/assets/css/tokens.css">
-  <link rel="stylesheet" href="/assets/css/base.css">
-  <link rel="stylesheet" href="/assets/css/components.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>404 — Page not found</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<script>
+(function(){var d=document.documentElement;d.classList.add('js');try{var t=localStorage.getItem('theme');if(t!=='light'&&t!=='dark'){t=matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'}d.dataset.theme=t;var l=localStorage.getItem('lang');if((l==='ru'||l==='kz')&&location.pathname==='/'){location.replace('/'+l+'/')}}catch(e){}})();
+</script>
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/base.css">
+<link rel="stylesheet" href="/assets/css/components.css">
 </head>
-
 <body>
-  <main class="container notfound">
-    <p class="hero__hello">404</p>
-    <h1 class="hero__name">404 - Page not found</h1>
-    <p class="hero__tagline">This page does not exist.</p>
-    <p><a class="btn btn--primary" href="/">Back to home</a></p>
-  </main>
+<main class="container notfound">
+  <p class="hero__hello">404</p>
+  <h1 class="hero__name">404 — Page not found</h1>
+  <p class="hero__tagline">This page does not exist.</p>
+  <p><a class="btn btn--primary" href="/">Back to home</a></p>
+</main>
 </body>
-
 </html>
