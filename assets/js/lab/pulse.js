@@ -1,5 +1,5 @@
 import { $, initLabPage, showError } from './common.js';
-import { cachedJson, summarizeRepos, activityByDay, heatmapSvg, languageBarsSvg } from './lib/pulse.js';
+import { cachedAll, summarizeRepos, activityByDay, heatmapSvg, languageBarsSvg } from './lib/pulse.js';
 
 initLabPage();
 
@@ -30,27 +30,51 @@ function renderRepos(top) {
 }
 
 async function load() {
-  try {
-    const [profile, repos, events] = await Promise.all([
-      cachedJson(API),
-      cachedJson(`${API}/repos?per_page=100&sort=pushed`),
-      cachedJson(`${API}/events/public?per_page=100`),
-    ]);
-    const summary = summarizeRepos(repos.data);
-    const activity = activityByDay(events.data);
-    const p = profile.data;
-    $('#p-profile').textContent = `${p.name ?? user}: ${summary.count} public repositories, ${p.followers ?? 0} followers, on GitHub since ${String(p.created_at ?? '').slice(0, 4) || 'n/a'}.`;
+  const [profile, repos, events] = await cachedAll([
+    API,
+    `${API}/repos?per_page=100&sort=pushed`,
+    `${API}/events/public?per_page=100`,
+  ]);
+  const results = [profile, repos, events];
+
+  if (results.every((r) => !r.ok)) {
+    $('#p-status').textContent = '';
+    showError($('#p-err'), new Error(`Could not load GitHub data (${profile.error}). Try again in a few minutes or open GitHub directly.`));
+    return;
+  }
+
+  const notes = [];
+  const summary = repos.ok ? summarizeRepos(repos.value.data) : null;
+  const p = profile.ok ? profile.value.data : null;
+
+  const parts = [p?.name ?? user];
+  if (summary) parts.push(`${summary.count} public repositories`);
+  if (p) parts.push(`${p.followers ?? 0} followers, on GitHub since ${String(p.created_at ?? '').slice(0, 4) || 'n/a'}`);
+  $('#p-profile').textContent = `${parts[0]}: ${parts.slice(1).join(', ') || 'details unavailable'}.`;
+
+  if (events.ok) {
+    const activity = activityByDay(events.value.data);
     $('#p-heatmap').innerHTML = heatmapSvg(activity.byDate); // generated SVG: numbers and ISO dates only
     $('#p-activity-note').textContent = `${activity.total} public events in the available window.`;
+  } else {
+    $('#p-heatmap').replaceChildren();
+    $('#p-activity-note').textContent = 'Activity is unavailable right now.';
+    notes.push(events.error);
+  }
+
+  if (summary) {
     $('#p-langs').innerHTML = summary.languages.length ? languageBarsSvg(summary.languages) : ''; // names are escaped by the generator
     renderRepos(summary.top);
-    const stale = [profile, repos, events].find((r) => r.stale);
-    $('#p-status').textContent = stale ? `Showing cached data (${stale.error}).` : '';
-    $('#p-body').hidden = false;
-  } catch (err) {
-    $('#p-status').textContent = '';
-    showError($('#p-err'), new Error(`Could not load GitHub data (${err.message}). Try again in a few minutes or open GitHub directly.`));
+  } else {
+    $('#p-langs').replaceChildren();
+    $('#p-repos').replaceChildren();
+    notes.push(repos.error);
   }
+
+  const stale = results.find((r) => r.ok && r.value.stale);
+  if (stale) notes.push(`showing cached data (${stale.value.error})`);
+  $('#p-status').textContent = notes.length ? `Some data is missing: ${[...new Set(notes)].join('; ')}.` : '';
+  $('#p-body').hidden = false;
 }
 
 load();

@@ -17,7 +17,7 @@ export async function cachedJson(url, { fetchFn = (...a) => fetch(...a), now = D
   if (cached && now - cached.t < ttl) return { data: cached.d, source: 'cache', stale: false };
   try {
     const res = await fetchFn(url, { headers: { Accept: 'application/vnd.github+json' } });
-    if (!res.ok) throw new Error(res.status === 403 ? 'GitHub rate limit reached, try again later' : `GitHub API error ${res.status}`);
+    if (!res.ok) throw new Error(res.status === 403 || res.status === 429 ? 'GitHub rate limit reached, try again later' : `GitHub API error ${res.status}`);
     const data = await res.json();
     writeStored(key, JSON.stringify({ t: now, d: data }));
     return { data, source: 'network', stale: false };
@@ -25,6 +25,11 @@ export async function cachedJson(url, { fetchFn = (...a) => fetch(...a), now = D
     if (cached) return { data: cached.d, source: 'cache', stale: true, error: err.message };
     throw err;
   }
+}
+
+export async function cachedAll(urls, opts) {
+  const settled = await Promise.allSettled(urls.map((u) => cachedJson(u, opts)));
+  return settled.map((r) => (r.status === 'fulfilled' ? { ok: true, value: r.value } : { ok: false, error: r.reason?.message ?? String(r.reason) }));
 }
 
 export function summarizeRepos(repos) {

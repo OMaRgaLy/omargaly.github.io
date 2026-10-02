@@ -127,3 +127,18 @@ test('goToJson survives self-referencing types', () => {
   const out = goToJson('type Node struct {\n\tNext *Node `json:"next"`\n}');
   assert.ok(JSON.parse(out));
 });
+
+test('goToJson does not blow up on structs with many self-referencing pointers', () => {
+  const fields = Array.from({ length: 20 }, (_, i) => `\tN${i} *Node \`json:"n${i}"\``).join('\n');
+  const started = Date.now();
+  const out = goToJson(`type Node struct {\n\tName string \`json:"name"\`\n${fields}\n}`);
+  assert.ok(Date.now() - started < 1000, 'expansion took too long');
+  const parsed = JSON.parse(out);
+  assert.equal(parsed.name, 'string');
+  assert.equal(parsed.n0, null);
+});
+
+test('goToJson still expands the same struct type used in sibling fields', () => {
+  const out = goToJson('type A struct {\n\tX B `json:"x"`\n\tY B `json:"y"`\n}\ntype B struct {\n\tV int `json:"v"`\n}');
+  assert.deepEqual(JSON.parse(out), { x: { v: 0 }, y: { v: 0 } });
+});

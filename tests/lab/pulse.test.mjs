@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { cachedJson, summarizeRepos, activityByDay, heatmapSvg, languageBarsSvg } from '../../assets/js/lab/lib/pulse.js';
+import { cachedJson, cachedAll, summarizeRepos, activityByDay, heatmapSvg, languageBarsSvg } from '../../assets/js/lab/lib/pulse.js';
 
 function withStorage(value, fn) {
   Object.defineProperty(globalThis, 'localStorage', { value, configurable: true, writable: true });
@@ -115,4 +115,20 @@ test('languageBarsSvg draws a track and a fill per language and escapes names', 
   assert.ok(svg.includes('&lt;b&gt;'));
   assert.ok(!svg.includes('<b>'));
   assert.match(svg, /50%/);
+});
+
+test('HTTP 429 is reported as a rate limit', async () => {
+  await withStorage(memStorage(), async () => {
+    await assert.rejects(() => cachedJson('https://x/429', { fetchFn: async () => ({ ok: false, status: 429 }) }), /rate limit/i);
+  });
+});
+
+test('cachedAll settles every request so one failure does not hide the others', async () => {
+  await withStorage(memStorage(), async () => {
+    const fetchFn = async (url) => (url.endsWith('/bad') ? { ok: false, status: 500 } : okResponse({ url }));
+    const r = await cachedAll(['https://x/a', 'https://x/bad', 'https://x/c'], { fetchFn });
+    assert.deepEqual(r.map((x) => x.ok), [true, false, true]);
+    assert.deepEqual(r[0].value.data, { url: 'https://x/a' });
+    assert.match(r[1].error, /GitHub API error 500/);
+  });
 });

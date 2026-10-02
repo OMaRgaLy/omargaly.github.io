@@ -136,18 +136,22 @@ function parseStructs(src) {
   return structs;
 }
 
-function sample(type, structs, depth) {
+function sample(type, structs, depth, stack = new Set()) {
   if (depth > 5) return null;
-  if (type.startsWith('*')) return sample(type.slice(1), structs, depth);
-  if (type.startsWith('[]')) return [sample(type.slice(2), structs, depth + 1)];
+  if (type.startsWith('*')) return sample(type.slice(1), structs, depth, stack);
+  if (type.startsWith('[]')) return [sample(type.slice(2), structs, depth + 1, stack)];
   const map = type.match(/^map\[string\](.+)$/);
-  if (map) return { key: sample(map[1], structs, depth + 1) };
+  if (map) return { key: sample(map[1], structs, depth + 1, stack) };
   if (type === 'string') return 'string';
   if (type === 'bool') return false;
   if (/^u?int(8|16|32|64)?$/.test(type) || /^float(32|64)$/.test(type)) return 0;
   if (type === 'time.Time') return '2006-01-02T15:04:05Z';
   if (structs.has(type)) {
-    return Object.fromEntries(structs.get(type).map((f) => [f.name, sample(f.type, structs, depth + 1)]));
+    if (stack.has(type)) return null; // a type that contains itself is cut here instead of expanded again
+    stack.add(type);
+    const value = Object.fromEntries(structs.get(type).map((f) => [f.name, sample(f.type, structs, depth + 1, stack)]));
+    stack.delete(type);
+    return value;
   }
   return null;
 }
