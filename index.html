@@ -1,152 +1,154 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" data-lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>About me</title>
-    <link rel="stylesheet" type="text/css" href="/assets/styles/styles.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Omargaly Bitebayev — Software Engineer · Backend &amp; AI</title>
+<meta name="description" content="Personal site of Omargaly Bitebayev: Go backend engineer growing into AI engineering.">
+<meta name="theme-color" content="#0a0c10">
+<link rel="canonical" href="https://omargaly.github.io/">
+<link rel="alternate" hreflang="en" href="https://omargaly.github.io/">
+<link rel="alternate" hreflang="ru" href="https://omargaly.github.io/ru/">
+<link rel="alternate" hreflang="kk" href="https://omargaly.github.io/kz/">
+<link rel="alternate" hreflang="x-default" href="https://omargaly.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Omargaly Bitebayev — Software Engineer · Backend &amp; AI">
+<meta property="og:description" content="Personal site of Omargaly Bitebayev: Go backend engineer growing into AI engineering.">
+<meta property="og:url" content="https://omargaly.github.io/">
+<meta property="og:image" content="https://omargaly.github.io/assets/img/og.png">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<script>
+(function(){var d=document.documentElement;d.classList.add('js');try{var t=localStorage.getItem('theme');if(t!=='light'&&t!=='dark'){t=matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'}d.dataset.theme=t;var l=localStorage.getItem('lang');if((l==='ru'||l==='kz')&&location.pathname==='/'){location.replace('/'+l+'/')}}catch(e){}})();
+</script>
+<link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/base.css">
+<link rel="stylesheet" href="/assets/css/components.css">
+<script type="module" src="/assets/js/main.js"></script>
 </head>
 <body>
-    <div class="main">
-        <div class="header">
-            <a href="#">
-                <span>EN</span>
-            </a>
-            <span>|</span>
-            <a href="/ru">
-                <span>RU</span>
-            </a>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="logo" href="/" aria-label="Omargaly Bitebayev">o<span>b</span>_</a>
+    <nav class="nav" aria-label="Primary">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#stack">Stack</a>
+      <a href="#projects">Projects</a>
+      <a href="#lab">Lab</a>
+    </nav>
+    <div class="lang" role="group" aria-label="Language"><a class="lang__item" href="/" hreflang="en" lang="en" data-lang-link="en" aria-current="true">EN</a><a class="lang__item" href="/ru/" hreflang="ru" lang="ru" data-lang-link="ru">РУ</a><a class="lang__item" href="/kz/" hreflang="kk" lang="kk" data-lang-link="kz">ҚАЗ<sup class="beta" title="Draft translation, proofreading in progress">beta</sup></a></div>
+    <button class="icon-btn" type="button" data-theme-toggle aria-label="Toggle theme"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.4 5.4 0 0 1-4.4 2.26 5.4 5.4 0 0 1-5.4-5.4c0-1.8.88-3.4 2.24-4.4A9.1 9.1 0 0 0 12 3z"/></svg></button>
+    <button class="icon-btn" type="button" data-terminal-open aria-label="Open terminal"><span aria-hidden="true">&gt;_</span></button>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero">
+    <div class="container hero__inner">
+      <div class="hero__photo">
+        <picture>
+          <source type="image/avif" srcset="/assets/img/avatar-168.avif 168w, /assets/img/avatar-336.avif 336w" sizes="168px">
+          <source type="image/webp" srcset="/assets/img/avatar-168.webp 168w, /assets/img/avatar-336.webp 336w" sizes="168px">
+          <img src="/assets/img/avatar-336.jpg" srcset="/assets/img/avatar-168.jpg 168w, /assets/img/avatar-336.jpg 336w" sizes="168px" width="168" height="168" alt="Portrait of Omargaly Bitebayev" fetchpriority="high">
+        </picture>
+      </div>
+      <div class="hero__text">
+        <p class="hero__hello">Hi, I&#39;m</p>
+        <h1 class="hero__name">Omargaly Bitebayev</h1>
+        <p class="hero__title">Software Engineer · Backend &amp; AI</p>
+        <p class="hero__tagline">Go backend engineer, growing into AI engineering.</p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="https://t.me/hackeevo" target="_blank" rel="noopener noreferrer">Say hi on Telegram</a>
+          <a class="btn" href="https://github.com/OMaRgaLy" target="_blank" rel="noopener noreferrer">GitHub</a>
         </div>
-        <div class="content">
-            <div class="content__hello">
-                <img class="content__hello-img" src="assets/img/avatar_new.jpg" alt="Avatar">
-                <div class="content__hello-text">
-                    <span class="content__name">
-                        Omargaly Bitebayev <br/>Backend Developer
-                    </span>
-                    <span class="content__description"></span>
-                    <nav class="content__social">
-                        <a href="https://www.linkedin.com/in/bitebayev" target="_blank" class="content__social-item">
-                            <img src="assets/img/icons/linkedin.png" alt="LinkedIn">
-                            <span>LinkedIn</span>
-                        </a>
-                        <a href="https://t.me/hackeevo" target="_blank" class="content__social-item">
-                            <img src="assets/img/icons/telegram.png" alt="Telegram">
-                            <span>@hAckeeVo</span>
-                        </a>
-                        <a href="https://github.com/OMaRgaLy" target="_blank" class="content__social-item">
-                            <img src="assets/img/icons/github-logo.png" alt="Telegram">
-                            <span>GitHub</span>
-                        </a>
-                    </nav>
-                </div>
-            </div>
-            <a href=""><img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=500&duration=3500&pause=1&multiline=true&width=500&height=80&separator=%3C&lines=Computer+Science+Enthusiast+;)%3CPHP+and+Go+Backend+Developer!" alt="Typing SVG" /></a>
-            <div class="content__main">
-                <div class="content__main-item">
-                    <div class="main-item__description">
-                        <p> Hello! My name is Omar, future Senior Software Engineer. I'm a Backend developer who knows how to take a task and see it through to completion. I enjoy exploring new technologies. In work, I value growth, teamwork, high-quality solutions, and social impact.
-                            Discussing code, proposing ideas, helping others, and learning from more experienced developers is an essential part of my work. Feel free to add me to your contacts in <a href="https://www.linkedin.com/in/bitebayev" target="_blank">LinkedIn</a> and/or type a message in <a href="https://t.me/hackeevo" target="_blank">
-                            Telegram</a></p>
-
-                    </div>
-                </div>
-                <!--
-                <h1 class="content__about-header">Icons</h1>
-                <h1 class="content__about-header">Blocks</h1>
-                <h2 class="content__subheader">Text</h2>
-
-                <div class="content__main-item">
-                    <div class="main-item__description">
-                        <p></p>
-                    </div>
-                </div>
-
-                <div class="content__main-item">
-                    <div class="main-item__description">
-                        <p></p>
-                    </div>
-                </div>-->
-                <h2 class="content__subheader">Projects</h2>
-                <div class="content__main-item project">
-                    <a data-fslightbox href="assets/img/project.png">
-                        <img src="assets/img/project.png" alt="project1">
-                    </a>
-                    <div>
-                        <div class="main-item__title">
-                            <a href="https://github.com/OMaRgaLy/hackeevo-project"><span>Task Manager API</span></a>
-                        </div>
-                        <div class="main-item__description">
-                            <p>Task Manager is a backend service built with PHP and MySQL for managing tasks and users via API. Runs in Docker containers (nginx, php-fpm, mysql). Implements transaction handling (commit/rollback) for safe user and user's tasks deletion. Tested with Postman, deployed via Git.</p>
-
-                        </div>
-                        <div class="main-item__subdescription">
-                            <p><span>Stack:</span> Docker: nginx, PHP-FPM, MySQL</p>
-                            <p class="main-item__links"><a href="https://github.com/OMaRgaLy/hackeevo-project"><span>Source Code</span></a><span>|</span><a href="http://195.80.238.99/"><span>Preview</span></a> </p>
-                        </div>
-                    </div>
-                </div><!--
-                <div class="content__main-item project">
-                    <a data-fslightbox href="assets/img/project2.png">
-                        <img src="assets/img/project2.png" alt="project2">
-                    </a>
-                    <div>
-                        <div class="main-item__title">
-                            <a href="/example/project.html"><span>Project 2</span></a>
-                        </div>
-                        <div class="main-item__description">
-                            <p><br/></p>
-                        </div>
-                        <div class="main-item__subdescription">
-                            <p><span>Stack:</span>Laravel, PostgreSQL</p>
-                            <p class="main-item__links"><a href=""><span>Source Code</span></a><span>|</span><a href=""><span>Preview</span></a> </p>
-                        </div>
-                    </div>
-                </div>
-                -->
-                <h2 class="content__subheader">Education</h2>
-                <div class="content__main-item post">
-                    <article>
-                        <h2 class="main-item__title">
-                            <a href="https://upgrade.kolesa.group/" target="_blank">Kolesa Upgrade</a>
-                        </h2>
-                        <p class="main-item__date">September - November, 2022</p>
-                        <div class="main-item__description">
-                            <p>Backend development essentials: from PHP 8+ and Go basics to full-fledged web services. Covers Slim, MySQL, Docker, HTTP principles, and API development.</p>
-                        </div>
-                    </article>
-                </div>
-                <div class="content__main-item post">
-                    <article>
-                        <h2 class="main-item__title">
-                            <a href="https://www.instagram.com/sapsan_code.kz/" target="_blank">Sapsan Code</a>
-                        </h2>
-                        <p class="main-item__date">September 2023 - May 2024</p>
-                        <div class="main-item__description">
-                            <p>Java Backend development from scratch: Covers Spring Boot, REST API creation, authentication and Docker containerization.</p>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </div>
-        <div class="footer">
-            <div>
-                <span>2025 © Omargaly Bitebayev</span>
-            </div>
-            <div>
-                <nav class="footer__social">
-                    <a href="https://www.linkedin.com/in/bitebayev" target="_blank" class="footer__social-item">
-                        <img src="assets/img/icons/linkedin.png" alt="LinkedIn">
-                    </a>
-                    <a href="https://t.me/hackeevo" target="_blank" class="footer__social-item">
-                        <img src="assets/img/icons/telegram.png" alt="Telegram">
-                    </a>
-                    <a href="https://github.com/OMaRgaLy" target="_blank" class="footer__social-item">
-                        <img src="assets/img/icons/github-logo.png" alt="Telegram">
-                    </a>
-                </nav>
-            </div>
-        </div>
+        <div class="socials"><a class="social-link" href="https://github.com/OMaRgaLy" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg><span>GitHub</span></a>
+<a class="social-link" href="https://www.linkedin.com/in/bitebayev" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg><span>LinkedIn</span></a>
+<a class="social-link" href="https://t.me/hackeevo" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg><span>Telegram</span></a>
+<a class="social-link" href="https://x.com/OMaRgaLy212" target="_blank" rel="noopener noreferrer" aria-label="X"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg><span>X</span></a></div>
+      </div>
     </div>
-    <script src="assets/scripts/fslightbox.js"></script>
+  </section>
+
+  <div class="container bento">
+    <section class="card card--about reveal" id="about">
+      <h2 class="card__title">About</h2>
+      <p>I&#39;m a backend engineer who likes to take a task and see it through to production. My day-to-day is Go, services and data, and I enjoy making complicated systems feel simple.</p>
+      <p>I&#39;m moving towards AI engineering — building agents and automation that do real work — and aiming to grow into a senior engineer along the way. I learn in public, share ideas and love a good code review.</p>
+      <p class="muted">Always up for a chat about code, systems and AI.</p>
+    </section>
+
+    <section class="card card--exp reveal" id="experience">
+      <h2 class="card__title">Experience</h2>
+      <article class="entry">
+  <h3 class="entry__title">Golang Backend Developer <span class="entry__at">@ Kwaaka</span></h3>
+  <p class="entry__meta">Mar 2025 — Present <span aria-hidden="true">·</span> <span data-duration data-start="2025-03-17" data-lang="en">1 yr 6 mos</span></p>
+  <p>Kwaaka automates restaurant operations: it brings orders from many food-delivery platforms into the restaurant&#39;s own systems, so teams stop juggling tablets and work in one flow. I build backend services in Go and AI-driven automation for real business workflows.</p>
+</article>
+    </section>
+
+    <section class="card card--edu reveal" id="education">
+      <h2 class="card__title">Education</h2>
+      <article class="entry">
+  <h3 class="entry__title"><a href="https://upgrade.kolesa.group/" target="_blank" rel="noopener noreferrer">Kolesa Upgrade</a></h3>
+  <p class="entry__meta">Sep — Nov 2022</p>
+  <p>Backend development essentials: from PHP 8+ and Go basics to full-fledged web services — Slim, MySQL, Docker, HTTP and API design.</p>
+</article>
+<article class="entry">
+  <h3 class="entry__title"><a href="https://www.instagram.com/sapsan_code.kz/" target="_blank" rel="noopener noreferrer">Sapsan Code</a></h3>
+  <p class="entry__meta">Sep 2023 — May 2024</p>
+  <p>Java backend from scratch: Spring Boot, REST APIs, authentication and Docker.</p>
+</article>
+    </section>
+
+    <section class="card card--stack reveal" id="stack">
+      <h2 class="card__title">Stack</h2>
+      <h3 class="card__sub">Daily</h3>
+      <ul class="chips"><li class="chip">Go</li><li class="chip">TypeScript</li><li class="chip">React</li><li class="chip">Next.js</li><li class="chip">Python</li><li class="chip">MongoDB</li><li class="chip">PostgreSQL</li><li class="chip">Docker</li><li class="chip">Coolify</li><li class="chip">Grafana</li><li class="chip">Loki</li><li class="chip">Sentry</li><li class="chip">Postman</li></ul>
+      <h3 class="card__sub">Side projects &amp; hobbies</h3>
+      <ul class="chips"><li class="chip">PHP</li><li class="chip">MySQL</li><li class="chip">Elixir</li><li class="chip">Redis</li><li class="chip">Kafka</li><li class="chip">gRPC</li><li class="chip">REST</li></ul>
+    </section>
+
+    <section class="card card--projects reveal" id="projects">
+      <h2 class="card__title">Projects</h2>
+      <p class="muted">Cooking something good. Check back soon.</p>
+<p><a class="btn" href="https://github.com/OMaRgaLy" target="_blank" rel="noopener noreferrer">Browse GitHub</a></p>
+    </section>
+
+    <section class="card card--lab reveal" id="lab">
+      <h2 class="card__title">Lab <span class="badge">Soon</span></h2>
+      <p>A playground of small dev and CTF tools is coming soon.</p>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <p class="muted">© 2026 Omargaly Bitebayev · Built by hand. No frameworks.</p>
+    <div class="socials socials--footer"><a class="social-link" href="https://github.com/OMaRgaLy" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg><span>GitHub</span></a>
+<a class="social-link" href="https://www.linkedin.com/in/bitebayev" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg><span>LinkedIn</span></a>
+<a class="social-link" href="https://t.me/hackeevo" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg><span>Telegram</span></a>
+<a class="social-link" href="https://x.com/OMaRgaLy212" target="_blank" rel="noopener noreferrer" aria-label="X"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg><span>X</span></a></div>
+  </div>
+</footer>
+
+<div class="terminal" id="terminal" role="dialog" aria-modal="true" aria-label="Terminal" hidden>
+  <div class="terminal__window">
+    <div class="terminal__bar">
+      <span class="terminal__title">Terminal</span>
+      <button type="button" class="terminal__close" data-terminal-close aria-label="Close">×</button>
+    </div>
+    <div class="terminal__out" id="terminal-out" role="log" aria-live="polite"></div>
+    <form class="terminal__form" id="terminal-form" autocomplete="off">
+      <label class="terminal__prompt" for="terminal-input">guest@omargaly:~$</label>
+      <input class="terminal__input" id="terminal-input" type="text" spellcheck="false" autocapitalize="off" autocomplete="off">
+    </form>
+  </div>
+</div>
+<script type="application/json" id="terminal-data">{"i18n":{"label":"Terminal","open":"Open terminal","close":"Close","prompt":"guest@omargaly:~$","hint":"Type \"help\" to start. Esc to close.","help":["Available commands:","  whoami   who am I","  stack    what I work with","  now      what I'm up to","  contact  where to find me","  lab      the playground","  theme    dark | light | toggle","  lang     en | ru | kz","  clear    clear the screen","  exit     close the terminal"],"whoami":["Omargaly Bitebayev","Software Engineer · Backend & AI","Go backend engineer, growing into AI engineering."],"now":["Building backend services in Go at Kwaaka.","Learning to build AI agents that do real work.","Tinkering with side projects and CTF puzzles."],"lab":["The lab is coming soon: dev and CTF tools in your browser."],"not_found":"command not found: {cmd}. Try \"help\".","usage_theme":"usage: theme dark | light | toggle","usage_lang":"usage: lang en | ru | kz","theme_set":"theme: {value}","lang_switching":"switching language: {value}...","stack_main":"daily","stack_hobby":"on the side"},"stack":{"main":["Go","TypeScript","React","Next.js","Python","MongoDB","PostgreSQL","Docker","Coolify","Grafana","Loki","Sentry","Postman"],"hobby":["PHP","MySQL","Elixir","Redis","Kafka","gRPC","REST"]},"links":[{"label":"GitHub","href":"https://github.com/OMaRgaLy"},{"label":"LinkedIn","href":"https://www.linkedin.com/in/bitebayev"},{"label":"Telegram","href":"https://t.me/hackeevo"},{"label":"X","href":"https://x.com/OMaRgaLy212"}]}</script>
 </body>
 </html>
