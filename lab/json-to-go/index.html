@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lab — Omargaly Bitebayev</title>
-<meta name="description" content="Small developer and CTF tools that run entirely in your browser.">
+<title>JSON ⇄ Go — Lab</title>
+<meta name="description" content="Turn JSON into Go structs with json tags, or a Go struct back into sample JSON.">
 <meta name="theme-color" content="#0a0c10">
-<link rel="canonical" href="https://omargaly.github.io/lab/">
+<link rel="canonical" href="https://omargaly.github.io/lab/json-to-go/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Lab — Omargaly Bitebayev">
-<meta property="og:description" content="Small developer and CTF tools that run entirely in your browser.">
-<meta property="og:url" content="https://omargaly.github.io/lab/">
+<meta property="og:title" content="JSON ⇄ Go — Lab">
+<meta property="og:description" content="Turn JSON into Go structs with json tags, or a Go struct back into sample JSON.">
+<meta property="og:url" content="https://omargaly.github.io/lab/json-to-go/">
 <meta property="og:image" content="https://omargaly.github.io/assets/img/og.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="/assets/css/base.css">
 <link rel="stylesheet" href="/assets/css/components.css">
 <link rel="stylesheet" href="/assets/css/lab.css">
-<script type="module" src="/assets/js/lab/index.js"></script>
+<script type="module" src="/assets/js/lab/json-to-go.js"></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -35,16 +35,30 @@
 </header>
 
 <main id="main" class="container lab">
-  
-  <h1 class="lab-title">Lab</h1>
-  <p class="lab-intro">Small developer and CTF tools. Everything runs in your browser; nothing you type leaves your device.</p>
-  <div class="tool-grid">
-<a class="tool-card" href="/lab/toolbox/"><h2>Dev Toolbox</h2><p>JWT decoder, Base64, URL and hex, UUID generator, timestamp converter.</p><ul class="tags"><li class="tag">jwt</li><li class="tag">base64</li><li class="tag">uuid</li><li class="tag">time</li></ul></a>
-<a class="tool-card" href="/lab/json-to-go/"><h2>JSON ⇄ Go</h2><p>Turn JSON into Go structs with json tags, or a Go struct back into sample JSON.</p><ul class="tags"><li class="tag">go</li><li class="tag">json</li></ul></a>
-<div class="tool-card tool-card--soon"><h2>Crypto &amp; CTF kit <span class="badge">Soon</span></h2><p>Operation chains, classical ciphers with crackers, hashes and HMAC, encoding detector.</p><ul class="tags"><li class="tag">ctf</li><li class="tag">ciphers</li><li class="tag">hashes</li></ul></div>
-<div class="tool-card tool-card--soon"><h2>GitHub Pulse <span class="badge">Soon</span></h2><p>Live activity heatmap, languages and top repositories drawn from the public GitHub API.</p><ul class="tags"><li class="tag">github</li><li class="tag">svg</li></ul></div>
-<div class="tool-card tool-card--soon"><h2>Mini CTF <span class="badge">Soon</span></h2><p>Four flags are hiding on this site. Find them, submit them, climb the scoreboard.</p><ul class="tags"><li class="tag">ctf</li><li class="tag">game</li></ul></div>
-</div>
+  <p class="lab-back"><a href="/lab/">← Lab</a></p>
+  <h1 class="lab-title">JSON ⇄ Go</h1>
+  <p class="lab-intro">Turn JSON into Go structs with json tags, or a Go struct back into sample JSON.</p>
+  <section class="panel">
+  <div class="row2">
+    <label class="field"><span>JSON</span>
+      <textarea class="code" id="j-in" spellcheck="false" rows="14" placeholder='{"user_id": 1, "name": "Omar", "tags": ["go", "ai"]}'></textarea>
+    </label>
+    <label class="field"><span>Go</span>
+      <textarea class="code" id="g-in" spellcheck="false" rows="14" placeholder="type Root struct { ... }"></textarea>
+    </label>
+  </div>
+  <label class="field"><span>Root type name</span><input type="text" id="root-name" value="Root" spellcheck="false"></label>
+  <div class="btn-row">
+    <button class="btn btn--sm btn--primary" type="button" id="to-go">JSON → Go</button>
+    <button class="btn btn--sm btn--primary" type="button" id="to-json">Go → JSON</button>
+    <button class="btn btn--sm" type="button" id="copy-go">Copy Go</button>
+    <button class="btn btn--sm" type="button" id="copy-json">Copy JSON</button>
+    <button class="btn btn--sm" type="button" id="example">Load example</button>
+  </div>
+  <p class="err" id="err" hidden></p>
+  <p class="muted">Go → JSON understands plain structs: strings, numbers, bools, slices, maps, pointers, <code>time.Time</code> and nested struct types. Fields tagged <code>json:"-"</code> are skipped.</p>
+</section>
+
 </main>
 
 <footer class="site-footer">

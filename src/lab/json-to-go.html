@@ -1,0 +1,20 @@
+<section class="panel">
+  <div class="row2">
+    <label class="field"><span>JSON</span>
+      <textarea class="code" id="j-in" spellcheck="false" rows="14" placeholder='{"user_id": 1, "name": "Omar", "tags": ["go", "ai"]}'></textarea>
+    </label>
+    <label class="field"><span>Go</span>
+      <textarea class="code" id="g-in" spellcheck="false" rows="14" placeholder="type Root struct { ... }"></textarea>
+    </label>
+  </div>
+  <label class="field"><span>Root type name</span><input type="text" id="root-name" value="Root" spellcheck="false"></label>
+  <div class="btn-row">
+    <button class="btn btn--sm btn--primary" type="button" id="to-go">JSON → Go</button>
+    <button class="btn btn--sm btn--primary" type="button" id="to-json">Go → JSON</button>
+    <button class="btn btn--sm" type="button" id="copy-go">Copy Go</button>
+    <button class="btn btn--sm" type="button" id="copy-json">Copy JSON</button>
+    <button class="btn btn--sm" type="button" id="example">Load example</button>
+  </div>
+  <p class="err" id="err" hidden></p>
+  <p class="muted">Go → JSON understands plain structs: strings, numbers, bools, slices, maps, pointers, <code>time.Time</code> and nested struct types. Fields tagged <code>json:"-"</code> are skipped.</p>
+</section>

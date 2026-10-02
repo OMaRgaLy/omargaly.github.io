@@ -12,7 +12,7 @@
       "title": "JSON ⇄ Go",
       "description": "Turn JSON into Go structs with json tags, or a Go struct back into sample JSON.",
       "tags": ["go", "json"],
-      "status": "soon"
+      "status": "live"
     },
     {
       "id": "crypto",
