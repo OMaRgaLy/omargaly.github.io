@@ -6,38 +6,50 @@
 </div>
 
 <section class="panel" role="tabpanel" data-panel="chain" id="panel-chain" aria-labelledby="tab-chain">
-  <label class="field"><span>Input</span><textarea class="code" id="chain-in" spellcheck="false" rows="5"></textarea></label>
+  <p class="hint">Chain several operations. Type the input, then click an operation to add it as a step. Steps run from top to bottom and the output updates immediately.</p>
+  <label class="field"><span>Input</span><textarea class="code" id="chain-in" spellcheck="false" rows="5" placeholder="Type or paste here"></textarea></label>
+  <h2>Add a step</h2>
+  <div class="palette" id="chain-palette"></div>
+  <h2>Steps</h2>
+  <p class="muted" id="chain-empty">No steps yet. Click an operation above to add it.</p>
   <div class="steps" id="chain-steps"></div>
   <div class="btn-row">
-    <select id="chain-add-op" aria-label="Operation to add"></select>
-    <button class="btn btn--sm" type="button" id="chain-add">Add step</button>
+    <button class="btn btn--sm" type="button" id="chain-example">Load example</button>
     <button class="btn btn--sm" type="button" id="chain-clear">Clear steps</button>
-    <button class="btn btn--sm" type="button" id="chain-copy">Copy output</button>
   </div>
   <p class="err" role="alert" id="chain-err" hidden></p>
+  <div class="out-head"><span>Output</span><button class="btn btn--sm" type="button" id="chain-copy">Copy output</button></div>
   <pre class="out" id="chain-out"></pre>
   <p class="muted" id="chain-note"></p>
 </section>
 
 <section class="panel" role="tabpanel" data-panel="ciphers" id="panel-ciphers" aria-labelledby="tab-ciphers" hidden>
-  <label class="field"><span>Cipher</span>
-    <select id="cipher">
-      <option value="caesar">Caesar</option>
-      <option value="vigenere">Vigenère</option>
-      <option value="atbash">Atbash</option>
-      <option value="rot13">ROT13</option>
-      <option value="morse">Morse</option>
-    </select>
-  </label>
-  <label class="field" id="cipher-key-wrap"><span id="cipher-key-label">Shift</span><input type="text" id="cipher-key" value="3" spellcheck="false"></label>
-  <label class="field"><span>Text</span><textarea class="code" id="cipher-in" spellcheck="false" rows="5"></textarea></label>
-  <div class="btn-row">
-    <button class="btn btn--sm" type="button" id="cipher-enc">Encrypt / encode</button>
-    <button class="btn btn--sm" type="button" id="cipher-dec">Decrypt / decode</button>
-    <button class="btn btn--sm btn--primary" type="button" id="cipher-crack">Crack</button>
-    <button class="btn btn--sm" type="button" id="cipher-copy">Copy output</button>
+  <p class="hint">Pick a cipher and type the text. The result updates as you type. Caesar and Vigenère can also be cracked without the key.</p>
+  <div class="toolbar">
+    <label class="inline-field">Cipher
+      <select id="cipher" class="inline-select">
+        <option value="caesar">Caesar</option>
+        <option value="vigenere">Vigenère</option>
+        <option value="atbash">Atbash</option>
+        <option value="rot13">ROT13</option>
+        <option value="morse">Morse</option>
+      </select>
+    </label>
+    <fieldset class="seg" id="cipher-mode-wrap">
+      <legend class="sr-only">Direction</legend>
+      <label><input type="radio" name="cipher-mode" value="forward" checked><span id="cipher-forward">Encrypt</span></label>
+      <label><input type="radio" name="cipher-mode" value="backward"><span id="cipher-backward">Decrypt</span></label>
+    </fieldset>
+    <label class="inline-field" id="cipher-key-wrap"><span id="cipher-key-label">Shift</span> <input type="text" id="cipher-key" value="3" spellcheck="false"></label>
   </div>
+  <label class="field"><span>Text</span><textarea class="code" id="cipher-in" spellcheck="false" rows="5" placeholder="Type or paste here"></textarea></label>
   <p class="err" role="alert" id="cipher-err" hidden></p>
+  <div class="out-head"><span>Output</span>
+    <span class="btn-row">
+      <button class="btn btn--sm btn--primary" type="button" id="cipher-crack">Crack without the key</button>
+      <button class="btn btn--sm" type="button" id="cipher-copy">Copy output</button>
+    </span>
+  </div>
   <pre class="out" id="cipher-out"></pre>
   <table class="table" id="cipher-table" hidden>
     <thead><tr><th>Shift</th><th>Plaintext</th></tr></thead>
@@ -46,6 +58,7 @@
 </section>
 
 <section class="panel" role="tabpanel" data-panel="hashes" id="panel-hashes" aria-labelledby="tab-hashes" hidden>
+  <p class="hint">Computes SHA-1, SHA-256, SHA-384 and SHA-512. Add a key to get HMAC instead of a plain hash.</p>
   <label class="field"><span>Text</span><textarea class="code" id="hash-in" spellcheck="false" rows="4"></textarea></label>
   <label class="field"><span>HMAC key (optional; leave empty for a plain hash)</span><input type="text" id="hash-key" spellcheck="false"></label>
   <div class="btn-row"><button class="btn btn--sm btn--primary" type="button" id="hash-run">Compute</button></div>
@@ -57,6 +70,7 @@
 </section>
 
 <section class="panel" role="tabpanel" data-panel="detect" id="panel-detect" aria-labelledby="tab-detect" hidden>
+  <p class="hint">Paste a mystery string and see what it most likely is.</p>
   <label class="field"><span>Mystery string</span><textarea class="code" id="detect-in" spellcheck="false" rows="4"></textarea></label>
   <ul class="repo-list" id="detect-out" aria-live="polite"></ul>
   <p class="muted" id="detect-empty"></p>
