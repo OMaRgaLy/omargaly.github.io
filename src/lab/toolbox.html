@@ -1,0 +1,86 @@
+<div class="tabs" role="tablist" aria-label="Toolbox">
+  <button class="tab" type="button" role="tab" data-tab="jwt">JWT</button>
+  <button class="tab" type="button" role="tab" data-tab="base64">Base64</button>
+  <button class="tab" type="button" role="tab" data-tab="url">URL</button>
+  <button class="tab" type="button" role="tab" data-tab="hex">Hex</button>
+  <button class="tab" type="button" role="tab" data-tab="uuid">UUID</button>
+  <button class="tab" type="button" role="tab" data-tab="time">Timestamp</button>
+</div>
+
+<section class="panel" role="tabpanel" data-panel="jwt">
+  <label class="field"><span>JWT</span>
+    <textarea class="code" id="jwt-in" spellcheck="false" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."></textarea>
+  </label>
+  <p class="err" id="jwt-err" hidden></p>
+  <div id="jwt-out" class="row2" hidden>
+    <div><h3>Header</h3><pre class="out" id="jwt-header"></pre></div>
+    <div><h3>Payload</h3><pre class="out" id="jwt-payload"></pre></div>
+  </div>
+  <p class="muted" id="jwt-meta"></p>
+  <p class="muted">The signature is not verified: this tool only decodes.</p>
+</section>
+
+<section class="panel" role="tabpanel" data-panel="base64" data-transform="base64" hidden>
+  <label class="field"><span>Input</span><textarea class="code" data-in spellcheck="false"></textarea></label>
+  <label class="field"><span><input type="checkbox" data-urlsafe> URL-safe alphabet when encoding</span></label>
+  <div class="btn-row">
+    <button class="btn btn--sm" type="button" data-act="encode">Encode</button>
+    <button class="btn btn--sm" type="button" data-act="decode">Decode</button>
+    <button class="btn btn--sm" type="button" data-act="copy">Copy output</button>
+  </div>
+  <p class="err" data-err hidden></p>
+  <pre class="out" data-out></pre>
+</section>
+
+<section class="panel" role="tabpanel" data-panel="url" data-transform="url" hidden>
+  <label class="field"><span>Input</span><textarea class="code" data-in spellcheck="false"></textarea></label>
+  <div class="btn-row">
+    <button class="btn btn--sm" type="button" data-act="encode">Encode</button>
+    <button class="btn btn--sm" type="button" data-act="decode">Decode</button>
+    <button class="btn btn--sm" type="button" data-act="copy">Copy output</button>
+  </div>
+  <p class="err" data-err hidden></p>
+  <pre class="out" data-out></pre>
+</section>
+
+<section class="panel" role="tabpanel" data-panel="hex" data-transform="hex" hidden>
+  <label class="field"><span>Input</span><textarea class="code" data-in spellcheck="false"></textarea></label>
+  <div class="btn-row">
+    <button class="btn btn--sm" type="button" data-act="encode">Encode</button>
+    <button class="btn btn--sm" type="button" data-act="decode">Decode</button>
+    <button class="btn btn--sm" type="button" data-act="copy">Copy output</button>
+  </div>
+  <p class="err" data-err hidden></p>
+  <pre class="out" data-out></pre>
+</section>
+
+<section class="panel" role="tabpanel" data-panel="uuid" hidden>
+  <div class="btn-row">
+    <label class="field"><span>How many (1-50)</span><input type="number" id="uuid-count" min="1" max="50" value="5"></label>
+  </div>
+  <div class="btn-row">
+    <button class="btn btn--sm" type="button" id="uuid-v4">Generate v4</button>
+    <button class="btn btn--sm" type="button" id="uuid-v7">Generate v7</button>
+    <button class="btn btn--sm" type="button" id="uuid-copy">Copy all</button>
+  </div>
+  <pre class="out" id="uuid-out"></pre>
+</section>
+
+<section class="panel" role="tabpanel" data-panel="time" hidden>
+  <label class="field"><span>Unix seconds, milliseconds or a date</span>
+    <input type="text" id="time-in" spellcheck="false" placeholder="1700000000 or 2023-11-14T22:13:20Z">
+  </label>
+  <div class="btn-row">
+    <button class="btn btn--sm" type="button" id="time-now">Now</button>
+  </div>
+  <p class="err" id="time-err" hidden></p>
+  <table class="table" id="time-table" hidden>
+    <tbody>
+      <tr><th>Seconds</th><td id="t-sec"></td></tr>
+      <tr><th>Milliseconds</th><td id="t-ms"></td></tr>
+      <tr><th>ISO 8601 (UTC)</th><td id="t-iso"></td></tr>
+      <tr><th>Your time zone</th><td id="t-local"></td></tr>
+      <tr><th>Relative</th><td id="t-rel"></td></tr>
+    </tbody>
+  </table>
+</section>

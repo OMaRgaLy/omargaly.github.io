@@ -5,7 +5,7 @@
       "title": "Dev Toolbox",
       "description": "JWT decoder, Base64, URL and hex, UUID generator, timestamp converter.",
       "tags": ["jwt", "base64", "uuid", "time"],
-      "status": "soon"
+      "status": "live"
     },
     {
       "id": "json-to-go",
