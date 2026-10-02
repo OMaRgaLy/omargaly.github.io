@@ -8,7 +8,6 @@ body {
   font-size: 1rem;
   line-height: 1.65;
   overflow-wrap: anywhere;
-  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
 }
 img, svg { max-width: 100%; display: block; }
