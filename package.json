@@ -7,7 +7,8 @@
     "test": "node --test \"tests/**/*.test.mjs\"",
     "serve": "npx --yes http-server . -p 8080 -c-1",
     "images": "node scripts/optimize-images.mjs",
-    "fonts": "node scripts/copy-fonts.mjs"
+    "fonts": "node scripts/copy-fonts.mjs",
+    "ctf": "node scripts/make-ctf.mjs"
   },
   "devDependencies": {
     "@fontsource-variable/inter": "^5.1.0",

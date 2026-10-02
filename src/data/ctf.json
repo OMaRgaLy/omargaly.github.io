@@ -1,0 +1,32 @@
+{
+  "challenges": [
+    {
+      "id": "source",
+      "title": "Read the room",
+      "hint": "Developers read the page source. Start with the home page.",
+      "sha256": "05a41ca57ad3aafa9d77ea9eb1190d5ced29f74feb27ae39d3d8cbc28ef59cf5"
+    },
+    {
+      "id": "console",
+      "title": "Loud console",
+      "hint": "Open DevTools on the home page and watch the console. Something there is encoded.",
+      "sha256": "5ac9370ee23cabb61b6bf1facf62c71b53b32d47eade6f9ce8b013d89ea32267"
+    },
+    {
+      "id": "terminal",
+      "title": "Secret command",
+      "hint": "The home page terminal has a command that is not in help. Is its output really encrypted?",
+      "sha256": "94a1a2c5a81b40198e729f7d11440c099421ca58c8f201c7157bae73c8262298"
+    },
+    {
+      "id": "robots",
+      "title": "Keep out",
+      "hint": "Which file politely asks crawlers to stay away? Follow it, then decode what you find.",
+      "sha256": "0af279df020a99c94021424e30e368b18c22c2aafdb9d22278738879b7a1c426"
+    }
+  ],
+  "artifacts": {
+    "source": "flag{view-source-is-a-superpower}",
+    "terminalCipher": "synt{ebg13-vf-abg-rapelcgvba}"
+  }
+}

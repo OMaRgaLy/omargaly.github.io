@@ -38,6 +38,9 @@ export function runCommand(input, data) {
       if (!LANGS.includes(v)) return { lines: [t.usage_lang] };
       return { lines: [fill(t.lang_switching, { value: v })], action: { type: 'lang', value: v } };
     }
+    case 'secret':
+      if (!data.hidden?.secret) return { lines: [fill(t.not_found, { cmd: first })] };
+      return { lines: ['access granted', data.hidden.secret] };
     default:
       return { lines: [fill(t.not_found, { cmd: first })] };
   }

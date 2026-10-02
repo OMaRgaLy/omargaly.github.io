@@ -96,6 +96,7 @@ export async function build({ now = new Date() } = {}) {
   ]);
   const pages = new Map();
   const reference = await readJson('i18n/en.json');
+  const ctf = await readJson('src/data/ctf.json');
 
   for (const lang of LANGS) {
     const s = await readJson(`i18n/${lang}.json`);
@@ -109,6 +110,7 @@ export async function build({ now = new Date() } = {}) {
       homePath: URL_PATH[lang],
       year: String(now.getUTCFullYear()),
       headScript: headScript.trim(),
+      ctfComment: `<!-- ${ctf.artifacts.source} : nice, you read the source. Submit it at /lab/ctf/ -->`,
       alternates: alternates(site),
       socials: socials(site),
       stackMain: chips(site.stack.main),
@@ -121,6 +123,7 @@ export async function build({ now = new Date() } = {}) {
         i18n: s.terminal,
         stack: site.stack,
         links: site.links.map(({ label, href }) => ({ label, href })),
+        hidden: { secret: ctf.artifacts.terminalCipher },
       }),
     };
     pages.set(OUT_FILE[lang], render(homeTpl, s, raw));
@@ -129,7 +132,7 @@ export async function build({ now = new Date() } = {}) {
   const en = await readJson('i18n/en.json');
   pages.set('404.html', render(notFoundTpl, en, { headScript: headScript.trim() }));
 
-  const lab = await buildLab({ site, headScript: headScript.trim(), ctf: { challenges: [] }, now });
+  const lab = await buildLab({ site, headScript: headScript.trim(), ctf, now });
   for (const [path, html] of lab.pages) pages.set(path, html);
 
   pages.set('sitemap.xml', sitemap(site, lab.urls));

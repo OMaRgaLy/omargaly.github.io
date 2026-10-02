@@ -37,6 +37,14 @@ test('lab navigates to the lab page', () => {
   assert.deepEqual(r.action, { type: 'goto', value: '/lab/' });
 });
 
+test('secret prints the hidden cipher but is not advertised and not available without data', () => {
+  const withHidden = { ...data, hidden: { secret: 'synt{grfg}' } };
+  const r = runCommand('secret', withHidden);
+  assert.ok(r.lines.includes('synt{grfg}'));
+  assert.ok(!en.terminal.help.some((l) => l.includes('secret')));
+  assert.deepEqual(runCommand('secret', data).lines, ['command not found: secret. Try "help".']);
+});
+
 test('unknown command echoes the input as plain text', () => {
   const r = runCommand('<img src=x onerror=alert(1)>', data);
   assert.deepEqual(r.lines, ['command not found: <img. Try "help".']);
