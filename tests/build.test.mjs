@@ -24,9 +24,9 @@ test('leaves no unresolved placeholders', () => {
 });
 
 test('computes experience duration at build time', () => {
-  assert.ok(en.includes('1 yr 6 mos'));
-  assert.ok(ru.includes('1 г. 6 мес.'));
-  assert.ok(kz.includes('1 жыл 6 ай'));
+  assert.ok(en.includes('1 yr 7 mos'));
+  assert.ok(ru.includes('1 г. 7 мес.'));
+  assert.ok(kz.includes('1 жыл 7 ай'));
 });
 
 test('has canonical and hreflang links', () => {

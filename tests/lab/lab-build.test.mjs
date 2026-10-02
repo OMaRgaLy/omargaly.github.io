@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { build } from '../../build.mjs';
+import { escapeHtml } from '../../src/lib/template.mjs';
 
 const lab = JSON.parse(readFileSync(new URL('../../src/data/lab.json', import.meta.url), 'utf8'));
 const pages = await build({ now: new Date('2026-10-03T12:00:00Z') });
@@ -18,7 +19,7 @@ test('the lab index lists every tool and links only live ones', () => {
   const html = pages.get('lab/index.html');
   assert.ok(html, 'lab/index.html missing');
   for (const t of lab.tools) {
-    assert.ok(html.includes(t.title), `${t.id} missing on the index`);
+    assert.ok(html.includes(escapeHtml(t.title)), `${t.id} missing on the index`);
     assert.equal(html.includes(`href="/lab/${t.id}/"`), t.status === 'live', `link state for ${t.id}`);
   }
 });
